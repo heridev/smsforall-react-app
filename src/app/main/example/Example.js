@@ -3,14 +3,16 @@ import FusePageSimple from '@fuse/core/FusePageSimple';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 
 const useStyles = makeStyles(theme => ({
 	layoutRoot: {}
 }));
 
-function ExamplePage(props) {
+const ExamplePage = props => {
 	const classes = useStyles(props);
 	const { t } = useTranslation('examplePage');
+  const [count, mifunctionseteadorcount] = useState(34);
 
 	return (
 		<FusePageSimple
@@ -28,11 +30,14 @@ function ExamplePage(props) {
 				</div>
 			}
 			content={
-				<div className="p-24">
-					<h4>Content</h4>
-					<br />
-					<DemoContent />
-				</div>
+        <div className="p-24">
+          <button onClick={() => mifunctionseteadorcount(count + 26)}>
+            Click me
+          </button>
+          <h4>counter - {count}</h4>
+          <br />
+          <DemoContent />
+        </div>
 			}
 		/>
 	);

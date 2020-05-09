@@ -13,9 +13,9 @@ export const defaultSettings = {
 	direction: 'ltr',
 	theme: {
 		main: 'default',
-		navbar: 'mainThemeDark',
+		navbar: 'mainThemeLight',
 		toolbar: 'mainThemeLight',
-		footer: 'mainThemeDark'
+		footer: 'mainThemeLight'
 	}
 };
 

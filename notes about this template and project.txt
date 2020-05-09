@@ -1,0 +1,75 @@
+
+## Playing with the new Fuse React template.
+
+### Examples about making http request using the actions
+src/app/auth/store/actions/user.actions.js
+
+there are some examples such as JWT, auth0Service and firebase
+
+
+### Redux forms
+It seems like they use Redux-form in the new version and look to be really cool, nice
+```
+<FormControl component="fieldset" className={classes.formControl}>
+  <FormLabel component="legend" className="text-14">
+    Navbar
+  </FormLabel>
+  <ThemeSelect value={settings.theme.navbar} name="theme.navbar" handleThemeChange={handleChange} />
+</FormControl>
+```
+
+You can find that example in the following file:
+```
+src/@fuse/core/FuseSettings/FuseSettings.js
+```
+
+El naranja es para el template the smsparatodos app
+
+El color morado/azul es para el demo de fusetemplate
+
+
+
+			path: '/pages/auth/login',
+			component: React.lazy(() => import('./LoginPage'))
+
+
+import LoginConfig from 'app/main/login/LoginConfig';
+
+const routeConfigs = [
+	LoginConfig,
+];
+
+
+	{
+		component: () => <Redirect to="/pages/errors/error-404" />
+	}
+
+
+
+
+
+src/app/auth/authRoles.js
+
+/**
+ * Authorization Roles
+ */
+const authRoles = {
+	admin: ['administrator'],
+	customer: ['customer'],
+	onlyGuest: []
+};
+
+export default authRoles;
+
+
+
+
+
+
+
+
+
+
+
+
+

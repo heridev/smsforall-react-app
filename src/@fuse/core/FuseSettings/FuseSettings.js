@@ -61,10 +61,6 @@ function FuseSettings(props) {
 			event.target.type === 'checkbox' ? event.target.checked : event.target.value
 		);
 
-		/**
-		 * If layout style changes,
-		 * Reset Layout Configuration
-		 */
 		if (event.target.name === 'layout.style' && event.target.value !== settings.layout.style) {
 			newSettings.layout.config = {};
 		}
