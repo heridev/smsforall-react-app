@@ -33,7 +33,7 @@ class FuseAuthorization extends Component {
 	}
 
 	redirectRoute() {
-		const { location, userRole, history } = this.props;
+		const { userRole, history } = this.props;
 
 		if (!userRole || userRole.length === 0) {
 			history.push({
