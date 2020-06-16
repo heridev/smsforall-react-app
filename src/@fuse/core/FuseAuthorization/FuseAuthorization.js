@@ -34,8 +34,7 @@ class FuseAuthorization extends Component {
 
 	redirectRoute() {
 		const { location, userRole, history } = this.props;
-		const { pathname, state } = location;
-		const redirectUrl = state && state.redirectUrl ? state.redirectUrl : '/';
+		const { pathname } = location;
 
 		if (!userRole || userRole.length === 0) {
 			history.push({

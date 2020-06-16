@@ -1,5 +1,3 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { authRoles } from 'app/auth';
 import Dashboard from './Dashboard';
 

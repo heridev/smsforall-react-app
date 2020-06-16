@@ -3,10 +3,7 @@ import { useForm } from '@fuse/hooks';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import { darken } from '@material-ui/core/styles/colorManipulator';
 import TextField from '@material-ui/core/TextField';
@@ -14,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as authActions from 'app/auth/store/actions';
 
 const useStyles = makeStyles(theme => ({
@@ -28,7 +25,7 @@ const LoginPage = () => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 
-	const { form, handleChange, resetForm } = useForm({
+	const { form, handleChange } = useForm({
 		email: '',
 		password: '',
 		remember: true
