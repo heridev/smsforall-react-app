@@ -19,7 +19,7 @@ const navigationConfig = [
 				translate: 'DASHBOARD',
 				type: 'item',
 				icon: 'whatshot',
-				url: '/dashboard'
+				url: '/'
 			}
 		]
 	}
