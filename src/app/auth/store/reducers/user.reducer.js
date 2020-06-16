@@ -1,11 +1,11 @@
 import * as Actions from '../actions';
 
 const initialState = {
-	role: [], // guest
+	role: '', // guest
 	data: {
-		displayName: 'Heriberto Perez',
-		photoURL: 'assets/images/avatars/heriberto.jpg',
-		email: 'joseheribertoperezmagana@gmail.com',
+		displayName: 'Andrea Romero',
+		photoURL: '',
+		email: 'p@elh.mx',
 		shortcuts: ['calendar', 'mail', 'contacts', 'todo']
 	}
 };

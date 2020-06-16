@@ -149,11 +149,11 @@ const FuseScrollbars = React.forwardRef((props, ref) => {
 	);
 });
 
-function mapStateToProps({ fuse }) {
+const mapStateToProps = state => {
 	return {
-		customScrollbars: fuse.settings.current.customScrollbars
+		customScrollbars: state.fuse.settings.current.customScrollbars
 	};
-}
+};
 
 FuseScrollbars.propTypes = {
 	onScrollY: PropTypes.func,

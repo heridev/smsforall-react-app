@@ -81,17 +81,11 @@ function UserMenu(props) {
 					</>
 				) : (
 					<>
-						<MenuItem component={Link} to="/pages/profile" onClick={userMenuClose} role="button">
+						<MenuItem component={Link} to="/" onClick={userMenuClose} role="button">
 							<ListItemIcon className="min-w-40">
 								<Icon>account_circle</Icon>
 							</ListItemIcon>
-							<ListItemText primary="My Profile" />
-						</MenuItem>
-						<MenuItem component={Link} to="/apps/mail" onClick={userMenuClose} role="button">
-							<ListItemIcon className="min-w-40">
-								<Icon>mail</Icon>
-							</ListItemIcon>
-							<ListItemText primary="Inbox" />
+							<ListItemText primary="Mi perfil" />
 						</MenuItem>
 						<MenuItem
 							onClick={() => {
@@ -102,7 +96,7 @@ function UserMenu(props) {
 							<ListItemIcon className="min-w-40">
 								<Icon>exit_to_app</Icon>
 							</ListItemIcon>
-							<ListItemText primary="Logout" />
+							<ListItemText primary="Cerrar sesión" />
 						</MenuItem>
 					</>
 				)}

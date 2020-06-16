@@ -1,7 +1,7 @@
 import React from 'react';
-import RegisterPage from './RegisterPage';
+import ForgotPasswordPage from './ForgotPasswordPage';
 
-const RegisterPageConfig = {
+const ForgotPasswordPageConfig = {
 	settings: {
 		layout: {
 			config: {
@@ -26,10 +26,10 @@ const RegisterPageConfig = {
 	auth: null,
 	routes: [
 		{
-			path: '/auth/register',
-			component: RegisterPage
+			path: '/auth/forgot-password',
+			component: ForgotPasswordPage
 		}
 	]
 };
 
-export default RegisterPageConfig;
+export default ForgotPasswordPageConfig;

@@ -5,7 +5,7 @@ function FuseSplashScreen() {
 		<div id="fuse-splash-screen">
 			<div className="center">
 				<div className="logo">
-					<img width="128" src="assets/images/logos/fuse.svg" alt="logo" />
+					<img width="128" src="assets/images/logos/1x/smsparatodos.png" alt="logo sms para todos" />
 				</div>
 				<div className="spinner-wrapper">
 					<div className="spinner">

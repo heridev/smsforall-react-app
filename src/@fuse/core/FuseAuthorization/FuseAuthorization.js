@@ -10,22 +10,12 @@ class FuseAuthorization extends Component {
 		super(props);
 		const { routes } = context;
 		this.state = {
-			accessGranted: true,
+			accessGranted: false,
 			routes
 		};
 	}
 
 	componentDidMount() {
-		if (!this.state.accessGranted) {
-			this.redirectRoute();
-		}
-	}
-
-	shouldComponentUpdate(nextProps, nextState) {
-		return nextState.accessGranted !== this.state.accessGranted;
-	}
-
-	componentDidUpdate() {
 		if (!this.state.accessGranted) {
 			this.redirectRoute();
 		}
@@ -47,38 +37,24 @@ class FuseAuthorization extends Component {
 		const { pathname, state } = location;
 		const redirectUrl = state && state.redirectUrl ? state.redirectUrl : '/';
 
-		/*
-        User is guest
-        Redirect to Login Page
-        */
 		if (!userRole || userRole.length === 0) {
 			history.push({
-        pathname: '/auth/login',
+				pathname: '/auth/login',
 				state: { redirectUrl: pathname }
-			});
-		} else {
-			/*
-        User is member
-        User must be on unAuthorized page or just logged in
-        Redirect to dashboard or redirectUrl
-        */
-			history.push({
-				pathname: redirectUrl
 			});
 		}
 	}
 
 	render() {
-		// console.info('Fuse Authorization rendered', accessGranted);
 		return this.state.accessGranted ? <>{this.props.children}</> : null;
 	}
 }
 
-function mapStateToProps({ auth }) {
+const mapStateToProps = ({ auth }) => {
 	return {
 		userRole: auth.user.role
 	};
-}
+};
 
 FuseAuthorization.contextType = AppContext;
 

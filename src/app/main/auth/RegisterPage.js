@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function RegisterPage() {
+const RegisterPage = () => {
 	const classes = useStyles();
 
 	const { form, handleChange, resetForm } = useForm({
@@ -32,7 +32,7 @@ function RegisterPage() {
 		acceptTermsConditions: false
 	});
 
-	function isFormValid() {
+	const isFormValid = () => {
 		return (
 			form.email.length > 0 &&
 			form.password.length > 0 &&
@@ -40,12 +40,12 @@ function RegisterPage() {
 			form.password === form.passwordConfirm &&
 			form.acceptTermsConditions
 		);
-	}
+	};
 
-	function handleSubmit(ev) {
+	const handleSubmit = ev => {
 		ev.preventDefault();
 		resetForm();
-	}
+	};
 
 	return (
 		<div className={clsx(classes.root, 'flex flex-col flex-auto flex-shrink-0 items-center justify-center p-32')}>
@@ -53,7 +53,11 @@ function RegisterPage() {
 				<FuseAnimate animation="transition.expandIn">
 					<Card className="w-full max-w-384">
 						<CardContent className="flex flex-col items-center justify-center p-32">
-							<img className="w-128 m-32" src="assets/images/logos/fuse.svg" alt="logo" />
+							<img
+								className="w-128 m-32"
+								src="assets/images/logos/1x/smsparatodos.png"
+								alt="logo smsparatodos"
+							/>
 
 							<Typography variant="h6" className="mt-16 mb-32">
 								Crear nueva cuenta
@@ -67,7 +71,7 @@ function RegisterPage() {
 							>
 								<TextField
 									className="mb-16"
-									label="Name"
+									label="Nombre Completo"
 									autoFocus
 									type="name"
 									name="name"
@@ -80,7 +84,19 @@ function RegisterPage() {
 
 								<TextField
 									className="mb-16"
-									label="Email"
+									label="Numero de Celular"
+									type="mobile_number"
+									name="mobile_number"
+									value={form.mobile_number}
+									onChange={handleChange}
+									variant="outlined"
+									required
+									fullWidth
+								/>
+
+								<TextField
+									className="mb-16"
+									label="Correo"
 									type="email"
 									name="email"
 									value={form.email}
@@ -92,7 +108,7 @@ function RegisterPage() {
 
 								<TextField
 									className="mb-16"
-									label="Password"
+									label="Contraseña"
 									type="password"
 									name="password"
 									value={form.password}
@@ -104,7 +120,7 @@ function RegisterPage() {
 
 								<TextField
 									className="mb-16"
-									label="Password (Confirm)"
+									label="Contraseña (Confirmación)"
 									type="password"
 									name="passwordConfirm"
 									value={form.passwordConfirm}
@@ -151,6 +167,6 @@ function RegisterPage() {
 			</div>
 		</div>
 	);
-}
+};
 
 export default RegisterPage;

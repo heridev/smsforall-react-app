@@ -8,7 +8,6 @@ const DashboardConfig = {
 		layout: {}
 	},
 	auth: authRoles.customer,
-	// auth: null,
 	routes: [
 		{
 			path: '/dashboard',

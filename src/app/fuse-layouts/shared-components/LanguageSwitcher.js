@@ -13,19 +13,14 @@ import { Link } from 'react-router-dom';
 
 const languages = [
 	{
+		id: 'es',
+		title: 'Español',
+		flag: 'mx'
+	},
+	{
 		id: 'en',
 		title: 'English',
 		flag: 'us'
-	},
-	{
-		id: 'tr',
-		title: 'Turkish',
-		flag: 'tr'
-	},
-	{
-		id: 'ar',
-		title: 'Arabic',
-		flag: 'sa'
 	}
 ];
 
@@ -100,15 +95,6 @@ function LanguageSwitcher(props) {
 						<ListItemText primary={lng.title} />
 					</MenuItem>
 				))}
-
-				<MenuItem
-					component={Link}
-					to="/documentation/working-with-fuse-react/multi-language"
-					onClick={userMenuClose}
-					role="button"
-				>
-					<ListItemText primary="Learn More" />
-				</MenuItem>
 			</Popover>
 		</>
 	);

@@ -1,3 +1,21 @@
+### React app application for Smsparatodos.com
+#### Description
+This is the application and frontend code for smsparatodos.com and in the case
+that you want to add any new features that the original fuse react app includes
+you can run the application demo stored in the following location
+```
+/Users/heridev/projects/personal/fuse_react_v4.1.5_template/fuse_react_demo
+```
+
+In the case that you do not find that directory in your computer anymore, remember
+that the original template was uploaded to the repository on bitbucket called
+```
+https://bitbucket.org/heridev/sms-para-todos-design-branding/src/master/
+```
+There is a zip file including all the sources for that template, also 
+you can download it again from envato.com
+
+### Original content including after buying and downloading this template from envato
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

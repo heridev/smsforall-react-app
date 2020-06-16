@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function Dashboard(props) {
+const Dashboard = (props) => {
 	const dispatch = useDispatch();
 	// const boards = useSelector(({ scrumboardApp }) => scrumboardApp.boards);
 	const boards = [];
@@ -58,7 +58,7 @@ function Dashboard(props) {
 			<div className="flex flex-grow flex-shrink-0 flex-col items-center container px-16 md:px-24">
 				<FuseAnimate>
 					<Typography className="mt-44 sm:mt-88 sm:py-24 text-32 sm:text-40 font-300" color="inherit">
-						Scrumboard App
+						Mis servidores móviles de SMS
 					</Typography>
 				</FuseAnimate>
 
@@ -101,7 +101,7 @@ function Dashboard(props) {
 							>
 								<Icon className="text-56">add_circle</Icon>
 								<Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">
-									Add new board
+									Dar de alta nuevo dispositivo
 								</Typography>
 							</div>
 						</div>

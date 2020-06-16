@@ -11,97 +11,27 @@ export const SET_USER_DATA = '[USER] SET DATA';
 export const REMOVE_USER_DATA = '[USER] REMOVE DATA';
 export const USER_LOGGED_OUT = '[USER] LOGGED OUT';
 
-/**
- * Set user data from Auth0 token data
- */
-export function setUserDataAuth0(tokenData) {
+export const setUserDataTest = userData => dispatch => {
 	const user = {
-		role: ['admin'],
-		from: 'auth0',
+		role: 'customer',
 		data: {
-			displayName: tokenData.username,
-			photoURL: tokenData.picture,
-			email: tokenData.email,
-			settings:
-				tokenData.user_metadata && tokenData.user_metadata.settings ? tokenData.user_metadata.settings : {},
+			displayName: userData.name,
+			photoURL: 'assets/images/avatars/heriberto.jpg',
+			email: userData.email,
+			settings: userData.user_metadata && userData.user_metadata.settings ? userData.user_metadata.settings : {},
 			shortcuts:
-				tokenData.user_metadata && tokenData.user_metadata.shortcuts ? tokenData.user_metadata.shortcuts : []
+				userData.user_metadata && userData.user_metadata.shortcuts ? userData.user_metadata.shortcuts : []
 		}
 	};
 
-	return setUserData(user);
-}
-
-/**
- * Set user data from Firebase data
- */
-export function setUserDataFirebase(user, authUser) {
-	if (
-		user &&
-		user.data &&
-		user.data.settings &&
-		user.data.settings.theme &&
-		user.data.settings.layout &&
-		user.data.settings.layout.style
-	) {
-		// Set user data but do not update
-		return setUserData(user);
-	}
-
-	// Create missing user settings
-	return createUserSettingsFirebase(authUser);
-}
-
-/**
- * Create User Settings with Firebase data
- */
-export function createUserSettingsFirebase(authUser) {
-	return (dispatch, getState) => {
-		const guestUser = getState().auth.user;
-		const fuseDefaultSettings = getState().fuse.settings.defaults;
-		const { currentUser } = firebase.auth();
-
-		/**
-		 * Merge with current Settings
-		 */
-		const user = _.merge({}, guestUser, {
-			uid: authUser.uid,
-			from: 'firebase',
-			role: ['admin'],
-			data: {
-				displayName: authUser.displayName,
-				email: authUser.email,
-				settings: { ...fuseDefaultSettings }
-			}
-		});
-		currentUser.updateProfile(user.data);
-
-		updateUserData(user, dispatch);
-		return dispatch(setUserData(user));
-	};
-}
+	dispatch(setUserData(user));
+};
 
 /**
  * Set User Data
  */
 export function setUserData(user) {
 	return dispatch => {
-		/*
-        You can redirect the logged-in user to a specific route depending on his role
-         */
-
-		// history.location.state = {
-		//     redirectUrl: user.redirectUrl // for example 'apps/academy'
-		// }
-
-		/*
-        Set User Settings
-         */
-		dispatch(FuseActions.setDefaultSettings(user.data.settings));
-
-		/*
-        Set User Data
-         */
 		dispatch({
 			type: SET_USER_DATA,
 			payload: user
@@ -165,22 +95,10 @@ export function logoutUser() {
 		}
 
 		history.push({
-			pathname: '/'
+			pathname: '/auth/login'
 		});
 
-		switch (user.from) {
-			case 'firebase': {
-				firebaseService.signOut();
-				break;
-			}
-			case 'auth0': {
-				auth0Service.logout();
-				break;
-			}
-			default: {
-				jwtService.logout();
-			}
-		}
+		jwtService.logout();
 
 		dispatch(FuseActions.setInitialSettings());
 

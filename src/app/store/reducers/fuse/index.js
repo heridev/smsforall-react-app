@@ -5,6 +5,7 @@ import navbar from './navbar.reducer';
 import navigation from './navigation.reducer';
 import routes from './routes.reducer';
 import settings from './settings.reducer';
+import site from './site.reducer';
 
 const fuseReducers = combineReducers({
 	navigation,
@@ -12,7 +13,8 @@ const fuseReducers = combineReducers({
 	navbar,
 	message,
 	dialog,
-	routes
+	routes,
+	site
 });
 
 export default fuseReducers;

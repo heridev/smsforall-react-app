@@ -24,7 +24,6 @@ const Error404PageConfig = {
 		}
 	},
 	auth: null,
-
 	routes: [
 		{
 			path: '/pages/error-404',

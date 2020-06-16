@@ -1,6 +1,6 @@
 const locale = {
 	OPTIONS: 'Menu',
-	DASHBOARD: 'Dashboard'
+	DASHBOARD: 'Menu principal'
 };
 
 export default locale;
