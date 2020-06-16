@@ -22,7 +22,6 @@ export function submitLogin({ email, password }) {
 				});
 			})
 			.catch(error => {
-				debugger;
 				return dispatch({
 					type: LOGIN_ERROR,
 					payload: error
