@@ -1,5 +1,4 @@
 import jwtService from 'app/services/jwtService';
-import * as Actions from 'app/store/actions';
 import history from '@history';
 import * as UserActions from './user.actions';
 

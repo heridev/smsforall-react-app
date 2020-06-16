@@ -1,11 +1,9 @@
 import history from '@history';
 import _ from '@lodash';
 import auth0Service from 'app/services/auth0Service';
-import firebaseService from 'app/services/firebaseService';
 import jwtService from 'app/services/jwtService';
 import * as MessageActions from 'app/store/actions/fuse/message.actions';
 import * as FuseActions from 'app/store/actions/fuse';
-import firebase from 'firebase/app';
 
 export const SET_USER_DATA = '[USER] SET DATA';
 export const REMOVE_USER_DATA = '[USER] REMOVE DATA';
@@ -118,17 +116,6 @@ function updateUserData(user, dispatch) {
 	}
 
 	switch (user.from) {
-		case 'firebase': {
-			firebaseService
-				.updateUserData(user)
-				.then(() => {
-					dispatch(MessageActions.showMessage({ message: 'User data saved to firebase' }));
-				})
-				.catch(error => {
-					dispatch(MessageActions.showMessage({ message: error.message }));
-				});
-			break;
-		}
 		case 'auth0': {
 			auth0Service
 				.updateUserData({

@@ -9,7 +9,6 @@ import * as Actions from 'app/store/actions';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 const languages = [
 	{
