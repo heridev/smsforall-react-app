@@ -8,7 +8,8 @@ const DashboardConfig = {
 	auth: authRoles.customer,
 	routes: [
 		{
-			path: '/dashboard',
+			path: '/',
+      exact: true,
 			component: Dashboard
 		}
 	]

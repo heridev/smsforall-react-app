@@ -13,7 +13,7 @@ export function submitLogin({ email, password }) {
 				dispatch(UserActions.setUserDataTest(userResponse.userAttributes));
 
 				history.push({
-					pathname: '/dashboard'
+					pathname: '/'
 				});
 
 				return dispatch({

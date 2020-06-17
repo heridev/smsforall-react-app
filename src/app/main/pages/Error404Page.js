@@ -35,7 +35,7 @@ const Error404Page = () => {
 					/>
 				</Paper>
 
-				<Link className="font-medium" to="/dashboard">
+				<Link className="font-medium" to="/">
 					Go back to dashboard
 				</Link>
 			</div>
