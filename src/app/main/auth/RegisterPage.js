@@ -12,161 +12,196 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { submitRegister } from 'app/auth/store/actions/register.actions';
+import { showLoadingSpinner } from 'app/store/actions/fuse/site.actions';
+import CountryAutocompleteSelect from 'app/common/CountryAutocompleteSelect';
+import ButtonSubmitWithLoaderSpinner from 'app/common/ButtonSubmitWithLoaderSpinner';
 
 const useStyles = makeStyles(theme => ({
-	root: {
-		background: `radial-gradient(${darken(theme.palette.primary.dark, 0.5)} 0%, ${theme.palette.primary.dark} 80%)`,
-		color: theme.palette.primary.contrastText
-	}
+  root: {
+    background: `radial-gradient(${darken(theme.palette.primary.dark, 0.5)} 0%, ${theme.palette.primary.dark} 80%)`,
+    color: theme.palette.primary.contrastText
+  }
 }));
 
-const RegisterPage = () => {
-	const classes = useStyles();
+const RegisterPage = props => {
+  const classes = useStyles();
 
-	const { form, handleChange, resetForm } = useForm({
-		name: '',
-		email: '',
-		password: '',
-		passwordConfirm: '',
-		acceptTermsConditions: false
-	});
+  const { form, handleChange, resetForm, handleChangeAutocomplete } = useForm({
+    country_international_code: '',
+    name: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+    acceptTermsConditions: false
+  });
 
-	const isFormValid = () => {
-		return (
-			form.email.length > 0 &&
-			form.password.length > 0 &&
-			form.password.length > 3 &&
-			form.password === form.passwordConfirm &&
-			form.acceptTermsConditions
-		);
-	};
+  const isFormValid = () => {
+    return (
+      form.email.length > 0 &&
+      form.password.length > 0 &&
+      form.password.length > 3 &&
+      form.mobile_number.length > 3 &&
+      form.country_international_code.length > 0 &&
+      form.password === form.passwordConfirm &&
+      form.acceptTermsConditions
+    );
+  };
 
-	const handleSubmit = ev => {
-		ev.preventDefault();
-		resetForm();
-	};
+  const disableCheckerFn = () => {
+    return !isFormValid() || props.isLoadingSpinnerVisible;
+  };
 
-	return (
-		<div className={clsx(classes.root, 'flex flex-col flex-auto flex-shrink-0 items-center justify-center p-32')}>
-			<div className="flex flex-col items-center justify-center w-full">
-				<FuseAnimate animation="transition.expandIn">
-					<Card className="w-full max-w-384">
-						<CardContent className="flex flex-col items-center justify-center p-32">
-							<img
-								className="w-128 m-32"
-								src="assets/images/logos/1x/smsparatodos.png"
-								alt="logo smsparatodos"
-							/>
+  const onAutocompleteChange = (event, values) => {
+    if (values && values.phone) {
+      handleChangeAutocomplete('country_international_code', values.phone);
+    }
+  };
 
-							<Typography variant="h6" className="mt-16 mb-32">
-								Crear nueva cuenta
-							</Typography>
+  const handleSubmit = ev => {
+    const userData = {
+      user: form
+    };
+    props.onSubmitRegister(userData);
+    props.onShowLoadingSpinner();
+    ev.preventDefault();
+  };
 
-							<form
-								name="registerForm"
-								noValidate
-								className="flex flex-col justify-center w-full"
-								onSubmit={handleSubmit}
-							>
-								<TextField
-									className="mb-16"
-									label="Nombre Completo"
-									autoFocus
-									type="name"
-									name="name"
-									value={form.name}
-									onChange={handleChange}
-									variant="outlined"
-									required
-									fullWidth
-								/>
+  return (
+    <div className={clsx(classes.root, 'flex flex-col flex-auto flex-shrink-0 items-center justify-center p-32')}>
+      <div className="flex flex-col items-center justify-center w-full">
+        <FuseAnimate animation="transition.expandIn">
+          <Card className="w-full max-w-384">
+            <CardContent className="flex flex-col items-center justify-center p-32">
+              <img className="w-128 m-32" src="assets/images/logos/1x/smsparatodos.png" alt="logo smsparatodos" />
 
-								<TextField
-									className="mb-16"
-									label="Numero de Celular"
-									type="mobile_number"
-									name="mobile_number"
-									value={form.mobile_number}
-									onChange={handleChange}
-									variant="outlined"
-									required
-									fullWidth
-								/>
+              <Typography variant="h6" className="mt-16 mb-32">
+                Crear nueva cuenta
+              </Typography>
 
-								<TextField
-									className="mb-16"
-									label="Correo"
-									type="email"
-									name="email"
-									value={form.email}
-									onChange={handleChange}
-									variant="outlined"
-									required
-									fullWidth
-								/>
+              <form
+                name="registerForm"
+                noValidate
+                className="flex flex-col justify-center w-full"
+                onSubmit={handleSubmit}
+              >
+                <TextField
+                  className="mb-16"
+                  label="Nombre Completo"
+                  autoFocus
+                  type="name"
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                />
 
-								<TextField
-									className="mb-16"
-									label="Contraseña"
-									type="password"
-									name="password"
-									value={form.password}
-									onChange={handleChange}
-									variant="outlined"
-									required
-									fullWidth
-								/>
+                <CountryAutocompleteSelect
+                  onAutocompleteChange={onAutocompleteChange}
+                  onDisableClearable
+                  labelProperty="Busca el código de tu país"
+                  className="mb-16"
+                />
 
-								<TextField
-									className="mb-16"
-									label="Contraseña (Confirmación)"
-									type="password"
-									name="passwordConfirm"
-									value={form.passwordConfirm}
-									onChange={handleChange}
-									variant="outlined"
-									required
-									fullWidth
-								/>
+                <Typography className="mb-16" variant="body2">
+                  Utilizaremos este número para confirmación
+                  <br />
+                  <strong>Por favor incluye el código de área local</strong>
+                </Typography>
 
-								<FormControl className="items-center">
-									<FormControlLabel
-										control={
-											<Checkbox
-												name="acceptTermsConditions"
-												checked={form.acceptTermsConditions}
-												onChange={handleChange}
-											/>
-										}
-										label="He leído y acepto los términos y condiciones"
-									/>
-								</FormControl>
+                <TextField
+                  className="mb-16"
+                  label="Numero de Celular(solo números)"
+                  type="mobile_number"
+                  name="mobile_number"
+                  value={form.mobile_number}
+                  onChange={handleChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                />
 
-								<Button
-									variant="contained"
-									color="primary"
-									className="w-224 mx-auto mt-16"
-									aria-label="Register"
-									disabled={!isFormValid()}
-									type="submit"
-								>
-									Registrar cuenta
-								</Button>
-							</form>
+                <TextField
+                  className="mb-16"
+                  label="Correo"
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                />
 
-							<div className="flex flex-col items-center justify-center pt-32 pb-24">
-								<span className="font-medium">Ya tienes una cuenta?</span>
-								<Link className="font-medium" to="/auth/login">
-									Iniciar sesión
-								</Link>
-							</div>
-						</CardContent>
-					</Card>
-				</FuseAnimate>
-			</div>
-		</div>
-	);
+                <TextField
+                  className="mb-16"
+                  label="Contraseña"
+                  type="password"
+                  name="password"
+                  value={form.password}
+                  onChange={handleChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                />
+
+                <TextField
+                  className="mb-16"
+                  label="Contraseña (Confirmación)"
+                  type="password"
+                  name="passwordConfirm"
+                  value={form.passwordConfirm}
+                  onChange={handleChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                />
+
+                <FormControl className="items-center">
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name="acceptTermsConditions"
+                        checked={form.acceptTermsConditions}
+                        onChange={handleChange}
+                      />
+                    }
+                    label="He leído y acepto los términos y condiciones"
+                  />
+                </FormControl>
+
+                <ButtonSubmitWithLoaderSpinner buttonLabel="Registrar cuenta" disableCheckerFn={disableCheckerFn} />
+              </form>
+
+              <div className="flex flex-col items-center justify-center pt-32 pb-24">
+                <span className="font-medium">Ya tienes una cuenta?</span>
+                <Link className="font-medium" to="/auth/login">
+                  Iniciar sesión
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </FuseAnimate>
+      </div>
+    </div>
+  );
 };
 
-export default RegisterPage;
+const mapDispatchToProps = dispatch => {
+  return {
+    onSubmitRegister: userData => dispatch(submitRegister(userData)),
+    onShowLoadingSpinner: () => dispatch(showLoadingSpinner())
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    isLoadingSpinnerVisible: state.fuse.site.is_loading_spinner_visible
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);
