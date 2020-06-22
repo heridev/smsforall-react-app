@@ -1,6 +1,5 @@
 import FuseAnimate from '@fuse/core/FuseAnimate';
 import { useForm } from '@fuse/hooks';
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -29,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 const RegisterPage = props => {
   const classes = useStyles();
 
-  const { form, handleChange, resetForm, handleChangeAutocomplete } = useForm({
+  const { form, handleChange, handleChangeAutocomplete } = useForm({
     country_international_code: '',
     name: '',
     email: '',
