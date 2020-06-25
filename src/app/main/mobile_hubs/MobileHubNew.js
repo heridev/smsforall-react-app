@@ -189,7 +189,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     isLoadingSpinnerVisible: state.fuse.site.is_loading_spinner_visible,
-    validationErrors: state.mobileHubs.validationErrors
+    validationErrors: state.utilsReducers.validationErrors
   };
 };
 
