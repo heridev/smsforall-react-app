@@ -1,13 +1,9 @@
 import FuseAnimate from '@fuse/core/FuseAnimate';
-import FuseAnimateGroup from '@fuse/core/FuseAnimateGroup';
-import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,7 +33,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Dashboard = props => {
-  const dispatch = useDispatch();
   const classes = useStyles(props);
 
   return (
