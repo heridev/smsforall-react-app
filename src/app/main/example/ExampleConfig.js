@@ -10,18 +10,18 @@ i18next.addResourceBundle('tr', 'examplePage', tr);
 i18next.addResourceBundle('ar', 'examplePage', ar);
 
 const ExampleConfig = {
-	settings: {
-		layout: {
-			config: {}
-		}
-	},
+  settings: {
+    layout: {
+      config: {}
+    }
+  },
   auth    : authRoles.admin,//['admin']
-	routes: [
-		{
-			path: '/example',
-			component: Example
-		}
-	]
+  routes: [
+    {
+      path: '/example',
+      component: Example
+    }
+  ]
 };
 
 export default ExampleConfig;

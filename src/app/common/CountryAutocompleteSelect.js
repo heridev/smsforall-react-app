@@ -8,25 +8,25 @@ import { makeStyles } from '@material-ui/core/styles';
 // ⚠️ No support for IE 11
 const countryToFlag = isoCode => {
   return typeof String.fromCodePoint !== 'undefined'
-    ? isoCode
-    .toUpperCase()
-    .replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
+    ? isoCode.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397))
     : isoCode;
-}
+};
 
 const useStyles = makeStyles({
   option: {
     fontSize: 15,
     '& > span': {
       marginRight: 10,
-      fontSize: 18,
-    },
-  },
+      fontSize: 18
+    }
+  }
 });
 
-const CountryAutocompleteSelect = (props) => {
+const CountryAutocompleteSelect = props => {
   const { labelProperty, className, onAutocompleteChange, onDisableClearable } = props;
-  const emptyFn = () => { console.log('onChange function') };
+  const emptyFn = () => {
+    console.log('onChange function');
+  };
   const onDefaultChange = onAutocompleteChange || emptyFn;
   const defaultLabelProperty = labelProperty || 'Busca y selecciona tu país';
   const defaultDisableClearable = onDisableClearable || false;
@@ -40,31 +40,31 @@ const CountryAutocompleteSelect = (props) => {
       className={className}
       disableClearable={defaultDisableClearable}
       classes={{
-        option: classes.option,
+        option: classes.option
       }}
       autoHighlight
-      getOptionLabel={(option) => option.label}
+      getOptionLabel={option => option.label}
       onChange={onDefaultChange}
-      renderOption={(option) => (
-        <React.Fragment>
+      renderOption={option => (
+        <>
           <span>{countryToFlag(option.code)}</span>
           {option.label} ({option.code}) +{option.phone}
-        </React.Fragment>
+        </>
       )}
-      renderInput={(params) => (
+      renderInput={params => (
         <TextField
           {...params}
           label={defaultLabelProperty}
           variant="outlined"
           inputProps={{
             ...params.inputProps,
-            autoComplete: 'new-password', // disable autocomplete and autofill
+            autoComplete: 'new-password' // disable autocomplete and autofill
           }}
         />
       )}
     />
   );
-}
+};
 
 // Entire list on https://bitbucket.org/atlassian/atlaskit-mk-2/raw/4ad0e56649c3e6c973e226b7efaeb28cb240ccb0/packages/core/select/src/data/countries.js
 const countries = [
@@ -108,7 +108,7 @@ const countries = [
   { code: 'TT', label: 'Trinidad y Tobago', phone: '1-868' },
   { code: 'US', label: 'United States', phone: '1', suggested: true },
   { code: 'UY', label: 'Uruguay', phone: '598' },
-  { code: 'VE', label: 'Venezuela', phone: '58' },
+  { code: 'VE', label: 'Venezuela', phone: '58' }
 ];
 
 export default CountryAutocompleteSelect;

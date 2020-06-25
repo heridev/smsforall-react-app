@@ -102,7 +102,6 @@ function SettingsPanel() {
 						Theme Settings
 					</Typography>
 
-					<FuseSettings />
 				</FuseScrollbars>
 			</Dialog>
 		</>
