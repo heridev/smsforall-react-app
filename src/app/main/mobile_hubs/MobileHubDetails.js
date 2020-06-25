@@ -16,6 +16,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import { getSmsMobileHubDetails, destroySmsMobileHub } from './mobile_hubs.actions';
+import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
   dividerStyle: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles({
   },
   deleteHub: {
     color: 'white',
-    background: 'red'
+    background: red
   }
 });
 
@@ -61,7 +62,7 @@ const MobileHubDetails = props => {
   useEffect(() => {
     dispatch(showLoadingSpinner());
     dispatch(getSmsMobileHubDetails(routeParams.mobileHubUid));
-  }, [dispatch]);
+  }, [dispatch, routeParams]);
 
   if (props.isLoadingSpinnerVisible) return <FuseLoading />;
 

@@ -1,5 +1,4 @@
 import FuseScrollbars from '@fuse/core/FuseScrollbars';
-import FuseSettings from '@fuse/core/FuseSettings';
 import Button from '@material-ui/core/Button';
 import { red } from '@material-ui/core/colors';
 import Dialog from '@material-ui/core/Dialog';

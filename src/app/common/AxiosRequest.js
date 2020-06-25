@@ -1,5 +1,4 @@
 import axios from 'axios';
-import jwtService from 'app/services/jwtService';
 import ReduxStore from 'app/store';
 import { logoutUser } from 'app/auth/store/actions/user.actions';
 import { hideLoadingSpinner } from 'app/store/actions/fuse/site.actions';

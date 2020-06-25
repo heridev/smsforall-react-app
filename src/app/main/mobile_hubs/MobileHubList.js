@@ -41,7 +41,6 @@ const useStyles = makeStyles(theme => ({
 
 const MobileHubList = props => {
   const dispatch = useDispatch();
-  const boards = [];
   const mobileHubCollection = useSelector(({ mobileHubs }) => mobileHubs.mobileHubCollection);
 
   const classes = useStyles(props);
