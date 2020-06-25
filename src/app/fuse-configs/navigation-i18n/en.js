@@ -5,7 +5,8 @@ const locale = {
   CREATE_NEW_DEVICE: 'Add new',
   LIST_DEVICES: 'List all',
   SEND_SMS_FORM: 'Send SMS now',
-  HOW_TO_SEND_USING_OUR_API: 'How to send a SMS'
+  HOW_TO_SEND_USING_OUR_API: 'How to send a SMS',
+  HOW_IT_WORKS: 'How it works?'
 };
 
 export default locale;

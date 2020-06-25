@@ -38,10 +38,16 @@ const navigationConfig = [
       //  id: 'send-sms',
       //  translate: 'SEND_SMS_FORM',
       //  type: 'item',
-      //  icon: 'school',
-      //  disable: true,
+      //  icon: 'message',
       //  url: '/apps/academy'
       // },
+      {
+       id: 'how-it-works',
+       translate: 'HOW_IT_WORKS',
+       type: 'item',
+       icon: 'sim_card',
+       url: '/how-it-works'
+      },
     ]
   },
   {
@@ -54,7 +60,7 @@ const navigationConfig = [
         id: 'how-to-send-using-our-api',
         translate: 'HOW_TO_SEND_USING_OUR_API',
         type: 'collapse',
-        icon: 'lock',
+        icon: 'vpn_key',
         // children: [
         //   {
         //     id: 'authentication-lock-screen',
