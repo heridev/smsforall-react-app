@@ -25,6 +25,8 @@ In order to make it disable you need to declara your own logic in your component
 
 You also need to listen for the site loadin spinner attribute, it can be done with something like this:
 ```
+import { connect } from 'react-redux';
+
 const mapDispatchToProps = dispatch => {
   return {
      ...yourlogic..
