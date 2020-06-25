@@ -58,7 +58,7 @@ const Course = props => {
               <Icon>menu</Icon>
             </IconButton>
           </Hidden>
-          <IconButton to="/apps/academy/courses" component={Link}>
+          <IconButton to="/mobile-hubs/list" component={Link}>
             <Icon>{theme.direction === 'ltr' ? 'arrow_back' : 'arrow_forward'}</Icon>
           </IconButton>
           <Typography className="flex-1 text-20 mx-16">Como funciona smsparatodos.com</Typography>
