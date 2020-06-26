@@ -30,6 +30,7 @@ const RegisterPage = props => {
 
   const { form, handleChange, handleChangeAutocomplete } = useForm({
     country_international_code: '',
+    mobile_number: '',
     name: '',
     email: '',
     password: '',

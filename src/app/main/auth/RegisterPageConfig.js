@@ -25,6 +25,7 @@ const RegisterPageConfig = {
   auth: null,
   routes: [
     {
+      exact: true,
       path: '/auth/register',
       component: RegisterPage
     }
