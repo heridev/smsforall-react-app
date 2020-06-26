@@ -50,6 +50,21 @@ const RegisterPage = props => {
     );
   };
 
+  const acceptTermsAndConditionsLabel = () => {
+    return (
+      <span>
+        He leído y acepto los{' '}
+        <a target="_blank" href="https://smsparatodos.com/terminos-y-condiciones-de-uso">
+          términos, condiciones{' '}
+        </a>
+        y{' '}
+        <a target="_blank" href="https://smsparatodos.com/politicas-de-privacidad-de-datos">
+          políticas de privacidad
+        </a>
+      </span>
+    );
+  };
+
   const disableCheckerFn = () => {
     return !isFormValid() || props.isLoadingSpinnerVisible;
   };
@@ -116,7 +131,7 @@ const RegisterPage = props => {
                 <TextField
                   className="mb-16"
                   label="Numero de Celular(solo números)"
-                  type="mobile_number"
+                  type="number"
                   name="mobile_number"
                   value={form.mobile_number}
                   onChange={handleChange}
@@ -170,7 +185,7 @@ const RegisterPage = props => {
                         onChange={handleChange}
                       />
                     }
-                    label="He leído y acepto los términos y condiciones"
+                    label={acceptTermsAndConditionsLabel()}
                   />
                 </FormControl>
 
