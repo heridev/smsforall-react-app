@@ -1,7 +1,8 @@
 import { authRoles } from 'app/auth';
 import Dashboard from './Dashboard';
+import HowItWorks from './HowItWorks';
 
-const DashboardConfig = {
+const DashboardPagesConfig = {
   settings: {
     layout: {}
   },
@@ -11,8 +12,12 @@ const DashboardConfig = {
       path: '/',
       exact: true,
       component: Dashboard
+    },
+    {
+      path: '/how-it-works',
+      component: HowItWorks
     }
   ]
 };
 
-export default DashboardConfig;
+export default DashboardPagesConfig;

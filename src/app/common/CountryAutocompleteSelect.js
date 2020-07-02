@@ -3,6 +3,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
+import { findFieldByValueOnCollection } from 'app/common/UtilsCollection';
 
 // ISO 3166-1 alpha-2
 // ⚠️ No support for IE 11
@@ -23,18 +24,24 @@ const useStyles = makeStyles({
 });
 
 const CountryAutocompleteSelect = props => {
-  const { labelProperty, className, onAutocompleteChange, onDisableClearable } = props;
+  const { labelProperty, className, onAutocompleteChange, onDisableClearable, defaultIntCode } = props;
   const emptyFn = () => {
     console.log('onChange function');
   };
   const onDefaultChange = onAutocompleteChange || emptyFn;
   const defaultLabelProperty = labelProperty || 'Busca y selecciona tu país';
   const defaultDisableClearable = onDisableClearable || false;
+  let countrySelected = null;
+  if (defaultIntCode) {
+    countrySelected = findFieldByValueOnCollection('phone', defaultIntCode, countries);
+  }
+
   const classes = useStyles();
 
   return (
     <Autocomplete
       id="country-international-code"
+      value={countrySelected}
       options={countries}
       name="countryInternationalCode"
       className={className}
@@ -43,7 +50,7 @@ const CountryAutocompleteSelect = props => {
         option: classes.option
       }}
       autoHighlight
-      getOptionLabel={option => option.label}
+      getOptionLabel={option => `${option.label} (+${option.phone})`}
       onChange={onDefaultChange}
       renderOption={option => (
         <>

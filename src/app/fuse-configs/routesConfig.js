@@ -2,18 +2,12 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import FuseUtils from '@fuse/utils';
 import authRoutesConfig from 'app/main/auth/authRoutesConfig';
-import PagesConfig from 'app/main/pages/PagesConfig';
 import Error404PageConfig from 'app/main/pages/Error404PageConfig';
-import DashboardConfig from 'app/main/dashboard/DashboardConfig';
+import DashboardPagesConfig from 'app/main/dashboard/DashboardPagesConfig';
 import mobileHubConfig from 'app/main/mobile_hubs/mobileHubConfig';
+import messageRoutesConfig from 'app/main/messages/messageRoutesConfig';
 
-const routeConfigs = [
-  ...authRoutesConfig,
-  Error404PageConfig,
-  PagesConfig,
-  DashboardConfig,
-  mobileHubConfig
-];
+const routeConfigs = [...authRoutesConfig, Error404PageConfig, DashboardPagesConfig, mobileHubConfig, messageRoutesConfig];
 
 const routes = [
   ...FuseUtils.generateRoutesFromConfigs(routeConfigs),

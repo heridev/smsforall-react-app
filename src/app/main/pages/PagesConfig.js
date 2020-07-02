@@ -10,7 +10,7 @@ const PagesConfig = {
   auth: null,
   routes: [
     {
-      path: '/how-it-works',
+      path: '/pages/how-it-works',
       component: HowItWorks
     }
   ]

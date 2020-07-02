@@ -72,9 +72,9 @@ export const getSmsMobileHubDetails = uuid => {
       });
 };
 
-export const getSmsMobileHubCollection = () => {
+export const getSmsMobileHubCollection = (pathName = '') => {
   return dispatch =>
-    AxiosGetRequest('sms_mobile_hubs', {})
+    AxiosGetRequest(`sms_mobile_hubs${pathName}`, {})
       .then(response => {
         const {
           data: { data: smsHubsCollection }

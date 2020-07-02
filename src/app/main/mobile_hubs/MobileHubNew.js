@@ -4,15 +4,15 @@ import Icon from '@material-ui/core/Icon';
 import { useForm } from '@fuse/hooks';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { showLoadingSpinner } from 'app/store/actions/fuse/site.actions';
 import ButtonSubmitWithLoaderSpinner from 'app/common/ButtonSubmitWithLoaderSpinner';
 import CountryAutocompleteSelect from 'app/common/CountryAutocompleteSelect';
-import _ from '@lodash';
 import { createSmsMobileHub } from './mobile_hubs.actions';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { hasValidationErrors, showValidationErrorMessage } from 'app/common/UtilsCollection';
 
 const useStyles = makeStyles(theme => ({
   layoutRoot: {
@@ -36,9 +36,10 @@ const useStyles = makeStyles(theme => ({
 const MobileHubNew = props => {
   const classes = useStyles();
   const theme = useTheme();
+  const [internationalCode, setInternationalCodeValue] = useState(props.userData.country_international_code);
 
   const { form, handleChange, handleChangeAutocomplete } = useForm({
-    country_international_code: '',
+    country_international_code: internationalCode,
     device_name: '',
     device_number: ''
   });
@@ -56,6 +57,7 @@ const MobileHubNew = props => {
 
   const onAutocompleteChange = (event, values) => {
     if (values && values.phone) {
+      setInternationalCodeValue(values.phone);
       handleChangeAutocomplete('country_international_code', values.phone);
     }
   };
@@ -71,26 +73,6 @@ const MobileHubNew = props => {
     props.onCreateSmsMobileHub(smsMobileHubData);
     props.onShowLoadingSpinner();
     ev.preventDefault();
-  };
-
-  const hasValidationErrors = fieldName => {
-    const result = _.find(props.validationErrors, function (value, key) {
-      if (key === fieldName) {
-        return true;
-      }
-    });
-
-    return result;
-  };
-
-  const showValidationErrorMessage = fieldName => {
-    const result = _.find(props.validationErrors, function (value, key) {
-      if (key === fieldName) {
-        return value;
-      }
-    });
-
-    return result;
   };
 
   return (
@@ -130,8 +112,8 @@ const MobileHubNew = props => {
             onSubmit={handleSubmit}
           >
             <TextField
-              error={hasValidationErrors('device_name')}
-              helperText={showValidationErrorMessage('device_name')}
+              error={hasValidationErrors(props.validationErrors, 'device_name')}
+              helperText={showValidationErrorMessage(props.validationErrors, 'device_name')}
               className="mb-16"
               label="Nombre del dispositivo"
               autoFocus
@@ -147,6 +129,7 @@ const MobileHubNew = props => {
             <CountryAutocompleteSelect
               onAutocompleteChange={onAutocompleteChange}
               onDisableClearable
+              defaultIntCode={internationalCode}
               labelProperty="Busca el código de tu país"
               className="mb-16"
             />
@@ -158,8 +141,8 @@ const MobileHubNew = props => {
             </Typography>
 
             <TextField
-              error={hasValidationErrors('device_number')}
-              helperText={showValidationErrorMessage('device_number')}
+              error={hasValidationErrors(props.validationErrors, 'device_number')}
+              helperText={showValidationErrorMessage(props.validationErrors, 'device_number')}
               className="mb-16"
               label="Numero de Celular(solo números)"
               type="number"
@@ -189,7 +172,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     isLoadingSpinnerVisible: state.fuse.site.is_loading_spinner_visible,
-    validationErrors: state.utilsReducers.validationErrors
+    validationErrors: state.utilsReducers.validationErrors,
+    userData: state.auth.user.data
   };
 };
 
