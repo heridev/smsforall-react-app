@@ -53,3 +53,19 @@ src/app/common/CountryAutocompleteSelect.js
 ```
 
 In case you want to show the country for any specific number and allow users to select them, you can take a look at that one and re-use it everywhere
+
+## This is a great example about showing a loading spinner in a component while making a request to the API
+
+```
+import { showLoadingSpinner } from 'app/store/actions/fuse/site.actions';
+
+import FuseLoading from '@fuse/core/FuseLoading';
+
+
+  useEffect(() => {
+    dispatch(showLoadingSpinner());
+    dispatch(getSmsMobileHubCollection());
+  }, [dispatch]);
+
+  if (props.isLoadingSpinnerVisible) return <FuseLoading />;
+```

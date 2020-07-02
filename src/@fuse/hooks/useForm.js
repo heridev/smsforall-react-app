@@ -6,11 +6,12 @@ function useForm(initialState, onSubmit) {
 
   const handleChange = useCallback(event => {
     event.persist();
+    const eventValue = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
     setForm(_form =>
       _.setIn(
         { ..._form },
         event.target.name,
-        event.target.type === 'checkbox' ? event.target.checked : event.target.value
+        eventValue
       )
     );
   }, []);

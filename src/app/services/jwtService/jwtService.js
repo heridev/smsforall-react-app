@@ -131,6 +131,7 @@ class JwtService extends FuseUtils.EventEmitter {
               data: { attributes: userAttributes }
             }
           } = response;
+
           if (userAttributes) {
             resolve(userAttributes);
           } else {

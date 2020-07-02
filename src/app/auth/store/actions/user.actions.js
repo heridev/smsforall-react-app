@@ -17,7 +17,8 @@ export const setUserDataTest = userData => dispatch => {
       photoURL: 'assets/images/avatars/profile.jpg',
       email: userData.email,
       settings: userData.user_metadata && userData.user_metadata.settings ? userData.user_metadata.settings : {},
-      shortcuts: userData.user_metadata && userData.user_metadata.shortcuts ? userData.user_metadata.shortcuts : []
+      shortcuts: userData.user_metadata && userData.user_metadata.shortcuts ? userData.user_metadata.shortcuts : [],
+      ...userData
     }
   };
 

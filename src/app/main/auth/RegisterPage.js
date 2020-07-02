@@ -10,7 +10,7 @@ import { darken } from '@material-ui/core/styles/colorManipulator';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { submitRegister } from 'app/auth/store/actions/register.actions';
@@ -27,6 +27,8 @@ const useStyles = makeStyles(theme => ({
 
 const RegisterPage = props => {
   const classes = useStyles();
+
+  const [internationalCode, setInternationalCodeValue] = useState(null);
 
   const { form, handleChange, handleChangeAutocomplete } = useForm({
     country_international_code: '',
@@ -54,11 +56,11 @@ const RegisterPage = props => {
     return (
       <span>
         He leído y acepto los{' '}
-        <a target="_blank" href="https://smsparatodos.com/terminos-y-condiciones-de-uso">
+        <a target="_blank" rel="noopener noreferrer" href="https://smsparatodos.com/terminos-y-condiciones-de-uso">
           términos, condiciones{' '}
         </a>
         y{' '}
-        <a target="_blank" href="https://smsparatodos.com/politicas-de-privacidad-de-datos">
+        <a target="_blank" rel="noopener noreferrer" href="https://smsparatodos.com/politicas-de-privacidad-de-datos">
           políticas de privacidad
         </a>
       </span>
@@ -71,6 +73,7 @@ const RegisterPage = props => {
 
   const onAutocompleteChange = (event, values) => {
     if (values && values.phone) {
+      setInternationalCodeValue(values.phone);
       handleChangeAutocomplete('country_international_code', values.phone);
     }
   };
@@ -117,6 +120,7 @@ const RegisterPage = props => {
 
                 <CountryAutocompleteSelect
                   onAutocompleteChange={onAutocompleteChange}
+                  defaultIntCode={internationalCode}
                   onDisableClearable
                   labelProperty="Busca el código de tu país"
                   className="mb-16"

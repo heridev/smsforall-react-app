@@ -34,19 +34,34 @@ const navigationConfig = [
           }
         ]
       },
-      // {
-      //  id: 'send-sms',
-      //  translate: 'SEND_SMS_FORM',
-      //  type: 'item',
-      //  icon: 'message',
-      //  url: '/apps/academy'
-      // },
       {
-       id: 'how-it-works',
-       translate: 'HOW_IT_WORKS',
-       type: 'item',
-       icon: 'sim_card',
-       url: '/how-it-works'
+        id: 'how-it-works',
+        translate: 'HOW_IT_WORKS',
+        type: 'item',
+        icon: 'sim_card',
+        url: '/how-it-works'
+      },
+
+      {
+        id: 'sms-notifications',
+        translate: 'MANAGE_TEXT_MESSAGES',
+        type: 'collapse',
+        icon: 'message',
+        url: '/sms-notifications/list',
+        children: [
+          {
+            id: 'sms-notifications-lists',
+            translate: 'LIST_TEXT_MESSAGES',
+            type: 'item',
+            url: '/sms-notifications/list'
+          },
+          {
+            id: 'sms-notifications-new',
+            translate: 'SEND_SMS_FORM',
+            type: 'item',
+            url: '/sms-notifications/new'
+          }
+        ]
       },
     ]
   },
@@ -60,7 +75,7 @@ const navigationConfig = [
         id: 'how-to-send-using-our-api',
         translate: 'HOW_TO_SEND_USING_OUR_API',
         type: 'collapse',
-        icon: 'vpn_key',
+        icon: 'vpn_key'
         // children: [
         //   {
         //     id: 'authentication-lock-screen',
