@@ -2,7 +2,7 @@ import { showMessage } from 'app/store/actions/fuse/message.actions';
 // import { AxiosPostRequest, AxiosGetRequest, AxiosDeleteRequest } from 'app/common/AxiosRequest';
 import { AxiosPostRequest } from 'app/common/AxiosRequest';
 // import history from '@history';
-import { addBackendValidationErrors, removeBackendValidationErrors } from 'app/common/utils.actions';
+import { addBackendValidationErrors } from 'app/common/utils.actions';
 
 // export const ADD_BACKEND_VALIDATION_ERRORS = '[FORM_VALIDATION] ADD';
 // export const CLEAR_BACKEND_VALIDATION_ERRORS = '[FORM_VALIDATION] CLEAR';

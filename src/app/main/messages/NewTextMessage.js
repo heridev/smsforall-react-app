@@ -3,7 +3,6 @@ import FusePageCarded from '@fuse/core/FusePageCarded';
 import Icon from '@material-ui/core/Icon';
 import { useForm } from '@fuse/hooks';
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -54,7 +53,8 @@ const MobileHubNew = props => {
 
   const mobileHubCollection = useSelector(({ mobileHubs }) => mobileHubs.mobileHubCollection);
 
-  const { setInForm, form, handleChange, handleChangeAutocomplete, resetForm } = useForm({
+  const { form, handleChange, handleChangeAutocomplete, resetForm } = useForm({
+  // const { setInForm, form, handleChange, handleChangeAutocomplete, resetForm } = useForm({
     country_international_code: internationalCode,
     sms_content: '',
     sms_number: '',
@@ -81,13 +81,6 @@ const MobileHubNew = props => {
     if (values && values.phone) {
       setInternationalCodeValue(values.phone);
       handleChangeAutocomplete('country_international_code', values.phone);
-    }
-    event.preventDefault();
-  };
-
-  const onAutocompleteHubChange = (event, values) => {
-    if (values && values.attributes.uuid) {
-      handleChangeAutocomplete('mobile_hub_uuid', values.attributes.uuid);
     }
     event.preventDefault();
   };
