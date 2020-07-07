@@ -59,6 +59,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.contrastText
   },
   contentCard: {
+    marginTop: '10px',
     display: 'flex',
     flex: '1 1 100%',
     flexDirection: 'column',

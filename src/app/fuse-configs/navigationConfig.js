@@ -47,13 +47,13 @@ const navigationConfig = [
         translate: 'MANAGE_TEXT_MESSAGES',
         type: 'collapse',
         icon: 'message',
-        url: '/sms-notifications/list',
+        url: '/sms-notifications/list/out',
         children: [
           {
             id: 'sms-notifications-lists',
             translate: 'LIST_TEXT_MESSAGES',
             type: 'item',
-            url: '/sms-notifications/list'
+            url: '/sms-notifications/list/out'
           },
           {
             id: 'sms-notifications-new',
@@ -62,7 +62,7 @@ const navigationConfig = [
             url: '/sms-notifications/new'
           }
         ]
-      },
+      }
     ]
   },
   {
