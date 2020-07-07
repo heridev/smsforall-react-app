@@ -1,109 +1,108 @@
+import _ from '@lodash';
 import FuseAnimate from '@fuse/core/FuseAnimate';
 import FuseAnimateGroup from '@fuse/core/FuseAnimateGroup';
-import Icon from '@material-ui/core/Icon';
-import { makeStyles } from '@material-ui/core/styles';
-import { fade } from '@material-ui/core/styles/colorManipulator';
-import Typography from '@material-ui/core/Typography';
-import clsx from 'clsx';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector, connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-// import { showLoadingSpinner } from 'app/store/actions/fuse/site.actions';
 import FuseLoading from '@fuse/core/FuseLoading';
-// import { getSmsMobileHubCollection } from './mobile_hubs.actions';
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+// import * as Actions from '../store/actions';
+import TextMessageListItem from './TextMessageListItem';
+import { showLoadingSpinner } from 'app/store/actions/fuse/site.actions';
+import { getTextMessagesCollection, setTextMessageSearchParams } from './text_messages.actions';
+import Pagination from '@material-ui/lab/Pagination';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    background: 'white',
-    color: theme.palette.getContrastText(theme.palette.primary.main)
+const useStyles = makeStyles((theme) => ({
+  pagination: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
-  board: {
-    cursor: 'pointer',
-    boxShadow: theme.shadows[0],
-    transitionProperty: 'box-shadow border-color',
-    transitionDuration: theme.transitions.duration.short,
-    transitionTimingFunction: theme.transitions.easing.easeInOut,
-    background: theme.palette.primary.dark,
-    color: theme.palette.getContrastText(theme.palette.primary.dark),
-    '&:hover': {
-      boxShadow: theme.shadows[6]
-    }
-  },
-  newBoard: {
-    borderWidth: 2,
-    borderStyle: 'dashed',
-    borderColor: fade(theme.palette.getContrastText(theme.palette.primary.main), 0.6),
-    '&:hover': {
-      borderColor: fade(theme.palette.getContrastText(theme.palette.primary.main), 0.8)
-    }
-  }
 }));
 
-const MobileHubList = props => {
+const TextMessageList = (props) => {
   const dispatch = useDispatch();
-  const mobileHubCollection = useSelector(({ mobileHubs }) => mobileHubs.mobileHubCollection);
-
+  const { t } = useTranslation('textMessagesAppTranslations');
   const classes = useStyles(props);
+  const [currentPage, setPage] = useState(1);
+  const { kindOfNotification } = props;
 
   useEffect(() => {
-    // dispatch(showLoadingSpinner());
-    // dispatch(getSmsMobileHubCollection());
-  }, [dispatch]);
+    dispatch(showLoadingSpinner());
+    const params = {
+      page_number: currentPage,
+      kind_of_notification: kindOfNotification
+    };
+    console.log(params, 'params')
+    dispatch(setTextMessageSearchParams(params));
+    dispatch(getTextMessagesCollection(params));
+  }, [dispatch, currentPage, kindOfNotification]);
 
-  if (props.isLoadingSpinnerVisible) return <FuseLoading />;
+  const isLoadingSpinnerVisible = useSelector(({ fuse }) => fuse.site.is_loading_spinner_visible);
+  const textMessagesCollection = useSelector(({ textMessages }) => textMessages.textMessagesCollection);
+  const textSearchParams = useSelector(({ textMessages }) => textMessages.textSearchParams);
+  const filteredData = textMessagesCollection && textMessagesCollection.sms_notifications;
+  const totPages = textMessagesCollection && textMessagesCollection.tot_pages;
+
+  if (isLoadingSpinnerVisible) return <FuseLoading />;
+
+  if (!filteredData) {
+    return null;
+  }
+
+  const renderTextMessages = textMessages => {
+    return textMessages.map(textMessage => {
+      return <TextMessageListItem textMessage={textMessage} key={textMessage.id} />
+    });
+  }
+
+  if (filteredData.length === 0) {
+    return (
+      <FuseAnimate delay={100}>
+        <div className="flex flex-1 items-center justify-center h-full">
+          <Typography color="textSecondary" variant="h5">
+            {t('NO_MESSAGES')}
+          </Typography>
+        </div>
+      </FuseAnimate>
+    );
+  }
+
+  const onChange = (event, newPage) => {
+    const newTextSearch = _.merge({}, textSearchParams);
+    setPage(newPage);
+    newTextSearch.page_number = newPage;
+    dispatch(setTextMessageSearchParams(newTextSearch));
+    dispatch(getTextMessagesCollection(newTextSearch));
+  };
 
   return (
-    <div className={clsx(classes.root, 'flex flex-grow flex-shrink-0 flex-col items-center')}>
-      <div className="flex flex-grow flex-shrink-0 flex-col items-center container px-16 md:px-24">
-        <FuseAnimate>
-          <Typography className="mt-12 sm:mt-12 sm:py-24 text-32 sm:text-40 font-300" color="inherit">
-            Gestión de Mensajes de Texto
-          </Typography>
-        </FuseAnimate>
-
-        <div>
-          <FuseAnimateGroup
-            className="flex flex-wrap w-full justify-center py-32 px-16"
-            enter={{
-              animation: 'transition.slideUpBigIn',
-              duration: 300
-            }}
-          >
-            {mobileHubCollection.map(board => (
-              <div className="w-224 h-224 p-16" key={board.id}>
-                <Link
-                  to={`/mobile-hubs/${board.attributes.uuid}/details`}
-                  className={clsx(
-                    classes.board,
-                    'flex flex-col items-center justify-center w-full h-full rounded py-24'
-                  )}
-                  role="button"
-                >
-                  <Icon className="text-56">phone_android</Icon>
-                  <Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">
-                    {board.attributes.device_name}
-                  </Typography>
-                  <Typography className="text-12 font-300 text-center pt-16 px-32" color="inherit">
-                    {`+${board.attributes.country_international_code} ${board.attributes.device_number}`}
-                  </Typography>
-                </Link>
-              </div>
-            ))}
-          </FuseAnimateGroup>
-        </div>
+    <List className="p-0">
+      <div className={classes.pagination}>
+        <Pagination
+          page={currentPage}
+          count={totPages}
+          onChange={onChange}
+          color="secondary" />
       </div>
-    </div>
+      <FuseAnimateGroup
+        enter={{
+          animation: 'transition.slideUpBigIn'
+        }}
+      >
+        {renderTextMessages(filteredData)}
+      </FuseAnimateGroup>
+      <div className={classes.pagination}>
+        <Pagination
+          page={currentPage}
+          count={totPages}
+          onChange={onChange}
+          color="secondary" />
+      </div>
+    </List>
   );
-};
+}
 
-const mapDispatchToProps = dispatch => {
-  return {};
-};
-
-const mapStateToProps = state => {
-  return {
-    isLoadingSpinnerVisible: state.fuse.site.is_loading_spinner_visible
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MobileHubList);
+export default withRouter(TextMessageList);

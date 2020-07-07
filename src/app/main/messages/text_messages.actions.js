@@ -1,15 +1,17 @@
 import { showMessage } from 'app/store/actions/fuse/message.actions';
-// import { AxiosPostRequest, AxiosGetRequest, AxiosDeleteRequest } from 'app/common/AxiosRequest';
-import { AxiosPostRequest } from 'app/common/AxiosRequest';
+import { AxiosPostRequest, AxiosGetRequest } from 'app/common/AxiosRequest';
+// import { AxiosPostRequest } from 'app/common/AxiosRequest';
 // import history from '@history';
 import { addBackendValidationErrors } from 'app/common/utils.actions';
 
 // export const ADD_BACKEND_VALIDATION_ERRORS = '[FORM_VALIDATION] ADD';
 // export const CLEAR_BACKEND_VALIDATION_ERRORS = '[FORM_VALIDATION] CLEAR';
-export const SET_TEXT_MESSAGE_DATA = '[TEXT_MESSAGE] SET';
-export const SET_TEXT_MESSAGE_COLLECTION = '[TEXT_MESSAGE] SET_COLLECTION';
+export const SET_TEXT_MESSAGE_DETAILS = '[TEXT_MESSAGE] SET';
+export const SET_TEXT_MESSAGES_COLLECTION = '[TEXT_MESSAGE] SET_COLLECTION';
 export const SET_CREATE_TEXT_MESSAGE_AS_SUCCESS = '[TEXT_MESSAGE] CREATE_TEXT_SUCESS';
 export const SET_TEXT_MESSAGE_CREATION_AS = '[TEXT_MESSAGE] SET_CREATION_AS';
+export const SET_TEXT_MESSAGE_SEARCH = '[TEXT_MESSAGE] SET_TEXT_SEARCH';
+export const SET_TEXT_MESSAGE_SEARCH_PARAMS = '[TEXT_MESSAGE] SET_TEXT_SEARCH_PARAMS';
 
 export const setTextMessageCreationAs = (status) => dispatch => {
   return dispatch({
@@ -18,13 +20,26 @@ export const setTextMessageCreationAs = (status) => dispatch => {
   });
 };
 
-// export const setTextMessageCollection = textMessageList => dispatch => {
-//   return dispatch({
-//     type: SET_MOBILE_HUB_COLLECTION,
-//     payload: hubCollection
-//   });
-// };
+export const setTextMessagesCollection = textMessageList => dispatch => {
+  return dispatch({
+    type: SET_TEXT_MESSAGES_COLLECTION,
+    payload: textMessageList
+  });
+};
 
+export const setTextSearch = searchText => dispatch => {
+  return dispatch({
+    type: SET_TEXT_MESSAGE_SEARCH,
+    payload: searchText
+  });
+};
+
+export const setTextMessageSearchParams = params => dispatch => {
+  return dispatch({
+    type: SET_TEXT_MESSAGE_SEARCH_PARAMS,
+    payload: params
+  });
+};
 // export const setTextMessageData = textMessageDetails => dispatch => {
 //   return dispatch({
 //     type: SET_MOBILE_HUB_DATA,
@@ -80,22 +95,22 @@ export const createTextMessage = dataParams => {
 //       });
 // };
 //
-// export const getSmsMobileHubCollection = () => {
-//   return dispatch =>
-//     AxiosGetRequest('sms_notifications', {})
-//       .then(response => {
-//         const {
-//           data: { data: smsTextMessageCollection }
-//         } = response;
-//         return dispatch(setMobileHubCollection(smsTextMessageCollection));
-//       })
-//       .catch(errorResponse => {
-//         dispatch(
-//           showMessage({
-//             message: 'Ocurrió un error al momento de consultar los dispositivos',
-//             variant: 'error',
-//             autoHideDuration: 4000
-//           })
-//         );
-//       });
-// };
+export const getTextMessagesCollection = (params) => {
+  return dispatch =>
+    AxiosGetRequest('sms_notifications', params)
+      .then(response => {
+        const {
+          data: { data: textMessagesCollection }
+        } = response;
+        return dispatch(setTextMessagesCollection(textMessagesCollection));
+      })
+      .catch(errorResponse => {
+        dispatch(
+          showMessage({
+            message: 'An error ocurred when fetching text messages',
+            variant: 'error',
+            autoHideDuration: 4000
+          })
+        );
+      });
+};

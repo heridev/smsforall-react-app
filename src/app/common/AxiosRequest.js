@@ -40,7 +40,7 @@ export const AxiosPostRequest = (endpointUrl, dataParams) => {
   axios.defaults.headers.common['authorization-client'] = authorizationClient;
   axios.defaults.headers.common['authorization-token'] = authorizationToken;
 
-	setupInterceptors();
+  setupInterceptors();
 
   return axios.post(apiUrl(endpointUrl), dataParams);
 };
@@ -52,10 +52,11 @@ export const AxiosGetRequest = (endpointUrl, dataParams) => {
   axios.defaults.baseURL = `${process.env.REACT_APP_API_URL}${API_V1_PATH}/`;
   axios.defaults.headers.common['authorization-client'] = authorizationClient;
   axios.defaults.headers.common['authorization-token'] = authorizationToken;
+  axios.defaults.headers.common['Content-Type'] = 'application/json';
 
-	setupInterceptors();
+  setupInterceptors();
 
-  return axios.get(endpointUrl, dataParams);
+  return axios.get(endpointUrl, { params: dataParams });
 };
 
 export const AxiosDeleteRequest = (endpointUrl, dataParams) => {
@@ -66,8 +67,7 @@ export const AxiosDeleteRequest = (endpointUrl, dataParams) => {
   axios.defaults.headers.common['authorization-client'] = authorizationClient;
   axios.defaults.headers.common['authorization-token'] = authorizationToken;
 
-	setupInterceptors();
+  setupInterceptors();
 
   return axios.delete(endpointUrl, dataParams);
 };
-
