@@ -43,6 +43,11 @@ const MobileHubDetails = props => {
 
   const mobileHubDetails = useSelector(({ mobileHubs }) => mobileHubs.mobileHubDetails);
   const routeParams = useParams();
+  let mobileHubUuid = 'Needs to be activated first';
+
+  if(mobileHubDetails && mobileHubDetails.status === 'activated') {
+    mobileHubUuid = mobileHubDetails && mobileHubDetails.uuid;
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -133,7 +138,7 @@ const MobileHubDetails = props => {
           </h4>
           <Divider className={classes.dividerStyle} />
           <h4>
-            Identificador único: <strong>{mobileHubDetails && mobileHubDetails.uuid}</strong>
+            Identificador único: <strong>{mobileHubUuid}</strong>
           </h4>
           <Divider className={classes.dividerStyle} />
           <h4>
