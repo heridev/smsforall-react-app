@@ -67,29 +67,56 @@ const navigationConfig = [
   },
   {
     id: 'pages',
-    title: 'Desarrolladores',
+    translate: 'DEVELOPERS_REST_API',
     type: 'group',
     icon: 'pages',
     children: [
       {
-        id: 'how-to-send-using-our-api',
-        translate: 'HOW_TO_SEND_USING_OUR_API',
-        type: 'collapse',
+        id: 'overview-api',
+        translate: 'OVERVIEW_API',
+        type: 'item',
+        url: '/user/api/overview',
         icon: 'vpn_key'
-        // children: [
-        //   {
-        //     id: 'authentication-lock-screen',
-        //     title: 'Lock Screen',
-        //     type: 'item',
-        //     url: '#'
-        //   },
-        //   {
-        //     id: 'authentication-mail-confirmation',
-        //     title: 'Mail Confirmation',
-        //     type: 'item',
-        //     url: '/pages/auth/mail-confirm'
-        //   }
-        // ]
+      },
+      {
+        id: 'sms-notifications-authorization-keys',
+        translate: 'AUTHORIZATION_KEYS',
+        type: 'item',
+        url: '/user/api/authorization-keys',
+        icon: 'vpn_key'
+      },
+      {
+        id: 'sms-notifications-new',
+        translate: 'CODE_EXAMPLES',
+        type: 'item',
+        url: '/user/api/credentials',
+        icon: 'vpn_key'
+      },
+      {
+        id: 'how-to-send-using-our-api',
+        translate: 'API_DOCS',
+        type: 'collapse',
+        icon: 'vpn_key',
+        children: [
+          {
+            id: 'api-body-params',
+            translate: 'API_BODY_PARAMS',
+            type: 'item',
+            url: '/user/api/body-params'
+          },
+          {
+            id: 'api-success-requests',
+            translate: 'API_SUCCESS_REQUESTS',
+            type: 'item',
+            url: '/user/api/success_requests'
+          },
+          {
+            id: 'api-failed-requests',
+            translate: 'API_FAILED_REQUESTS',
+            type: 'item',
+            url: '/user/api/failed_requests'
+          },
+        ]
       }
     ]
   }
