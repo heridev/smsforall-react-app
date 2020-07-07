@@ -15,6 +15,9 @@ https://bitbucket.org/heridev/sms-para-todos-design-branding/src/master/
 There is a zip file including all the sources for that template, also 
 you can download it again from envato.com
 
+### Linters, eslint
+If are having troubles with that configuration feel free to open the .eslintrc file and update accordingly to your needs
+
 ### Original content including after buying and downloading this template from envato
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

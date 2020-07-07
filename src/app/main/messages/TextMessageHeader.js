@@ -34,7 +34,9 @@ const TextMessageHeader = props => {
         debounceSearch.current(searchTerm);
       }
     },
-    [searchTerm, firstLoad] // Only call effect if debounced search term changes
+		// if we add the firstLoad it will make two requests :(
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+    [searchTerm] // Only call effect if debounced search term changes
   );
 
   const { t } = useTranslation('textMessagesAppTranslations');

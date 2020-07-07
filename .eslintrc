@@ -11,7 +11,8 @@
         "prettier/react"
     ],
     "plugins": [
-        "prettier"
+        "prettier",
+        "react-hooks"
     ],
     "settings": {
         "import/resolver": {
