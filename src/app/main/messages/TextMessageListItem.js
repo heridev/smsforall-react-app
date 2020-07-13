@@ -45,16 +45,27 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TextMessageListItem = props => {
-  const { textMessage: { attributes: textMessageAttrs }} = props;
+  const {
+    textMessage: { attributes: textMessageAttrs }
+  } = props;
   const classes = useStyles(props);
   const checked = false;
+
+  const renderProcessedBy = textMessageAttrs => {
+    const processedBy = textMessageAttrs.processed_by_sms_mobile_hub;
+    const decoratedStatus = textMessageAttrs.decorated_status;
+    if (decoratedStatus === 'delivered') return null;
+    if (!processedBy.data) return null;
+
+    return `Processed by: ${processedBy.data.attributes.device_name}`;
+  };
 
   return (
     <ListItem
       dense
       button
-      onClick={() =>
-          console.log('something....')
+      onClick={
+        () => console.log('something....')
         // props.history.push(
         //   toPath({
         //     ...routeParams,
@@ -74,21 +85,34 @@ const TextMessageListItem = props => {
       <div className="flex flex-1 flex-col relative overflow-hidden">
         <div className="flex items-center justify-between px-16 pb-8">
           <div className="flex items-center">
-            <Typography variant="subtitle1">
-              {textMessageAttrs.sms_number}
-            </Typography>
+            <Typography variant="subtitle1">{textMessageAttrs.sms_number}</Typography>
           </div>
-          <Typography>{textMessageAttrs.decorated_delivered_at}</Typography>
+
+          <div className="flex items-center">
+            <Typography variant="subtitle1">{renderProcessedBy(textMessageAttrs)}</Typography>
+          </div>
+
+          <div className="flex items-center">
+            <Typography>{textMessageAttrs.decorated_delivered_at}</Typography>
+          </div>
         </div>
 
-        <div className="flex flex-col px-16 py-0">
-          <Typography>{textMessageAttrs.sms_content}</Typography>
+        <div className="flex items-center justify-between px-16 pb-8">
+          <div className="flex items-center">
+            <Typography>{textMessageAttrs.sms_content}</Typography>
+          </div>
         </div>
 
-        <div className="flex justify-end px-12">
-          <div className={clsx(classes.labelContainer, 'mx-2 mt-4')}>
-            <div className={classes.color} style={{ backgroundColor: "#388E3C" }} />
-            <div>{textMessageAttrs.decorated_status}</div>
+        <div className="flex justify-end pl-12">
+          <div className="flex items-center pl-16 hidden">
+            <Typography variant="subtitle1">{textMessageAttrs.sms_number}</Typography>
+          </div>
+
+          <div className="flex justify-end px-12">
+            <div className={clsx(classes.labelContainer, 'mx-2 mt-4')}>
+              <div className={classes.color} style={{ backgroundColor: '#388E3C' }} />
+              <div>{textMessageAttrs.decorated_status}</div>
+            </div>
           </div>
         </div>
       </div>
