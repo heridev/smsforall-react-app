@@ -17,7 +17,8 @@ const locale = {
   SMS_HUB_PHONE_NUMBER: 'Phone number (only numbers)',
   SMS_TYPE_LABEL: 'Type of delivery',
   NEW_SMS_CONTENT: 'Message content',
-  SEND_SMS_BUTTON_LABEL: 'Send'
+  SEND_SMS_BUTTON_LABEL: 'Send',
+  SELECT_DEVICE_FROM: 'Select your device'
 };
 
 export default locale;

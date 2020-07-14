@@ -163,9 +163,11 @@ const MobileHubNew = props => {
             />
 
             <FormControl required variant="outlined">
-              <InputLabel htmlFor="sms-type-native-required">Selecciona el dispositivo de envío</InputLabel>
+              <InputLabel htmlFor="sms-type-native-required">
+                {t('SELECT_DEVICE_FROM')}
+              </InputLabel>
               <Select
-                label="Selecciona el dispositivo de envío"
+                label={t('SELECT_DEVICE_FROM')}
                 native
                 value={form.mobile_hub_uuid}
                 onChange={handleChange}
@@ -182,7 +184,9 @@ const MobileHubNew = props => {
             </FormControl>
 
             <FormControl required variant="outlined">
-              <InputLabel htmlFor="sms-type-native-required">Tipo de Entrega</InputLabel>
+              <InputLabel htmlFor="sms-type-native-required">
+                {t('SMS_TYPE_LABEL')}
+              </InputLabel>
               <Select
                 label={t('SMS_TYPE_LABEL')}
                 native

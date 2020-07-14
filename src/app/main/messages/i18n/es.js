@@ -17,7 +17,8 @@ const locale = {
   SMS_HUB_PHONE_NUMBER: 'Número de Celular(solo números)',
   SMS_TYPE_LABEL: 'Tipo de Entrega',
   NEW_SMS_CONTENT: 'Contenido del mensaje',
-  SEND_SMS_BUTTON_LABEL: 'Enviar'
+  SEND_SMS_BUTTON_LABEL: 'Enviar',
+  SELECT_DEVICE_FROM: 'Selecciona el dispositivo de envío'
 };
 
 export default locale;
