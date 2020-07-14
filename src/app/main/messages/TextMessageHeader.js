@@ -34,8 +34,8 @@ const TextMessageHeader = props => {
         debounceSearch.current(searchTerm);
       }
     },
-		// if we add the firstLoad it will make two requests :(
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+    // if we add the firstLoad it will make two requests :(
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [searchTerm] // Only call effect if debounced search term changes
   );
 

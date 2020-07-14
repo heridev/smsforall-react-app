@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { showLoadingSpinner } from 'app/store/actions/fuse/site.actions';
 import FuseLoading from '@fuse/core/FuseLoading';
 import { getSmsMobileHubCollection } from './mobile_hubs.actions';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,8 +43,8 @@ const useStyles = makeStyles(theme => ({
 const MobileHubList = props => {
   const dispatch = useDispatch();
   const mobileHubCollection = useSelector(({ mobileHubs }) => mobileHubs.mobileHubCollection);
-
   const classes = useStyles(props);
+  const { t } = useTranslation('mobileHubTranslations');
 
   useEffect(() => {
     dispatch(showLoadingSpinner());
@@ -57,7 +58,7 @@ const MobileHubList = props => {
       <div className="flex flex-grow flex-shrink-0 flex-col items-center container px-16 md:px-24">
         <FuseAnimate>
           <Typography className="mt-12 sm:mt-12 sm:py-24 text-32 sm:text-40 font-300" color="inherit">
-            Mis servidores móviles de SMS
+            {t('LIST_ALL_MY_DEVICES')}
           </Typography>
         </FuseAnimate>
 
@@ -100,7 +101,7 @@ const MobileHubList = props => {
               >
                 <Icon className="text-56">add_circle</Icon>
                 <Typography className="text-16 font-300 text-center pt-16 px-32" color="inherit">
-                  Dar de alta nuevo dispositivo
+                  {t('ADD_NEW_HUB_DEVICE')}
                 </Typography>
               </Link>
             </div>

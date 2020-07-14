@@ -16,6 +16,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import { getSmsMobileHubDetails, destroySmsMobileHub } from './mobile_hubs.actions';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles({
   dividerStyle: {
@@ -40,10 +41,10 @@ const MobileHubDetails = props => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-
+  const { t } = useTranslation('mobileHubTranslations');
   const mobileHubDetails = useSelector(({ mobileHubs }) => mobileHubs.mobileHubDetails);
   const routeParams = useParams();
-  let mobileHubUuid = 'Needs to be activated first';
+  let mobileHubUuid = t('DEVICE_NEEDS_ACTIVATION');
 
   if(mobileHubDetails && mobileHubDetails.status === 'activated') {
     mobileHubUuid = mobileHubDetails && mobileHubDetails.uuid;
@@ -72,20 +73,20 @@ const MobileHubDetails = props => {
 
   const renderShowModalDialog = () => (
     <Dialog fullScreen={false} open={open} onClose={handleClose} aria-labelledby="responsive-dialog-title">
-      <DialogTitle id="responsive-dialog-title">Estás seguro de que deseas eliminar este dispositivo?</DialogTitle>
+      <DialogTitle id="responsive-dialog-title">
+        {t('ARE_YOU_SURE_TO_DESTROY')}
+      </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Al aceptar la eliminación de este dispositivo, aceptas que cualquier petición asociada a dicho
-          dispositivo será eliminada de nuestro aplicación.
-          Note: En caso de estar completamente seguro favor de confirmar en las siguientes opciones.
+          {t('WARNING_ABOUT_DESTROY')}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={handleClose} color="primary">
-          Cancelar
+          {t('CANCEL_BUTTON_DESTROY')}
         </Button>
         <Button onClick={destroyMobileHub} color="primary" autoFocus>
-          Continuar
+          {t('CONTINUE_BUTTON_DESTROY')}
         </Button>
       </DialogActions>
     </Dialog>
@@ -109,14 +110,14 @@ const MobileHubDetails = props => {
                 color="inherit"
               >
                 <Icon className="text-20">{theme.direction === 'ltr' ? 'arrow_back' : 'arrow_forward'}</Icon>
-                <span className="mx-4">Ver todos mis dispositivos</span>
+                <span className="mx-4">{t('LIST_ALL_MY_DEVICES')}</span>
               </Typography>
             </FuseAnimate>
 
             <div className="flex min-w-0 items-center sm:items-start">
               <FuseAnimate animation="transition.slideLeftIn" delay={50}>
                 <Typography className="text-16 sm:text-20 truncate">
-                  Nombre del dispositivo: {mobileHubDetails && mobileHubDetails.device_name}
+                  {t('NAME_OF_DEVICE')} : {mobileHubDetails && mobileHubDetails.device_name}
                 </Typography>
               </FuseAnimate>
             </div>
@@ -124,7 +125,7 @@ const MobileHubDetails = props => {
 
           <div className="flex items-center">
             <Button className={classes.deleteHub} onClick={handleClickOpen} variant="contained">
-              Destruir
+              {t('DESTROY_BUTTON_LABEL')}
             </Button>
           </div>
           {renderShowModalDialog()}
@@ -133,24 +134,28 @@ const MobileHubDetails = props => {
       content={
         <div className="p-24">
           <h4>
-            Pin de activación para aplicación Android:{' '}
+            {t('ACTIVATION_PIN_NUMBER')}: {' '}
             <strong>{mobileHubDetails && mobileHubDetails.temporal_password}</strong>
           </h4>
           <Divider className={classes.dividerStyle} />
           <h4>
-            Identificador único: <strong>{mobileHubUuid}</strong>
+            {t('UNIQUE_DEVICE_IDENTIFIER')}: {' '}
+            <strong>{mobileHubUuid}</strong>
           </h4>
           <Divider className={classes.dividerStyle} />
           <h4>
-            Numero Móvil: <strong>{mobileHubDetails && mobileHubDetails.device_number}</strong>
+            {t('SMS_HUB_PHONE_NUMBER')}: {' '}
+            <strong>{mobileHubDetails && mobileHubDetails.device_number}</strong>
           </h4>
           <Divider className={classes.dividerStyle} />
           <h4>
-            Código Internacional: <strong>+{mobileHubDetails && mobileHubDetails.country_international_code}</strong>
+            {t('INTERNATIONAL_CODE')}: {' '}
+            <strong>+{mobileHubDetails && mobileHubDetails.country_international_code}</strong>
           </h4>
           <Divider className={classes.dividerStyle} />
           <h4>
-            Estado del dispositivo: <strong>{mobileHubDetails && mobileHubDetails.friendly_status_name}</strong>
+            {t('STATUS_DEVICE_HUB')}: {' '}
+            <strong>{mobileHubDetails && mobileHubDetails.friendly_status_name}</strong>
           </h4>
           <Divider className={classes.dividerStyle} />
         </div>

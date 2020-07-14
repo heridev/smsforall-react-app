@@ -35,7 +35,6 @@ const TextMessageList = (props) => {
       page_number: currentPage,
       kind_of_notification: kindOfNotification
     };
-    console.log(params, 'params')
     dispatch(setTextMessageSearchParams(params));
     dispatch(getTextMessagesCollection(params));
   }, [dispatch, currentPage, kindOfNotification]);

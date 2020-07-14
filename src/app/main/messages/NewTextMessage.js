@@ -17,6 +17,7 @@ import { useDispatch, useSelector, connect } from 'react-redux';
 import { getSmsMobileHubCollection } from 'app/main/mobile_hubs/mobile_hubs.actions';
 import FuseLoading from '@fuse/core/FuseLoading';
 import { createTextMessage, setTextMessageCreationAs } from './text_messages.actions';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
   layoutRoot: {
@@ -39,12 +40,11 @@ const useStyles = makeStyles(theme => ({
 
 const MobileHubNew = props => {
   const CHARACTER_LIMIT = 160;
-
-
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
   const [internationalCode, setInternationalCodeValue] = useState(props.userData.country_international_code);
+  const { t } = useTranslation('textMessagesAppTranslations');
 
   useEffect(() => {
     dispatch(showLoadingSpinner());
@@ -131,13 +131,17 @@ const MobileHubNew = props => {
               color="inherit"
             >
               <Icon className="text-20">{theme.direction === 'ltr' ? 'arrow_back' : 'arrow_forward'}</Icon>
-              <span className="mx-4">Ver todos los mensajes</span>
+              <span className="mx-4">
+                {t('VIEW_ALL_MESSAGES')}
+              </span>
             </Typography>
           </FuseAnimate>
 
           <div className="flex flex-col min-w-0 items-center sm:items-start">
             <FuseAnimate animation="transition.slideLeftIn" delay={50}>
-              <Typography className="text-16 sm:text-20 truncate">Enviar nuevo mensaje de texto</Typography>
+              <Typography className="text-16 sm:text-20 truncate">
+                {t('SEND_NEW_TEXT_MESSAGE')}
+              </Typography>
             </FuseAnimate>
           </div>
         </div>
@@ -154,7 +158,7 @@ const MobileHubNew = props => {
               onAutocompleteChange={onAutocompleteChange}
               onDisableClearable
               defaultIntCode={internationalCode}
-              labelProperty="Busca el código de tu país"
+              labelProperty={t('SEARCH_YOUR_COUNTRY_CODE')}
               className="mb-16"
             />
 
@@ -180,7 +184,7 @@ const MobileHubNew = props => {
             <FormControl required variant="outlined">
               <InputLabel htmlFor="sms-type-native-required">Tipo de Entrega</InputLabel>
               <Select
-                label="Tipo de Entrega"
+                label={t('SMS_TYPE_LABEL')}
                 native
                 value={form.sms_type}
                 onChange={handleChange}
@@ -197,7 +201,7 @@ const MobileHubNew = props => {
 
             <TextField
               className="mb-16"
-              label="Numero de Celular(solo números)"
+              label={t('SMS_HUB_PHONE_NUMBER')}
               type="number"
               name="sms_number"
               value={form.sms_number}
@@ -213,7 +217,7 @@ const MobileHubNew = props => {
                 maxLength: CHARACTER_LIMIT
               }}
               className="mb-16"
-              label="Contenido del mensaje"
+              label={t('NEW_SMS_CONTENT')}
               autoFocus
               type="text"
               name="sms_content"
@@ -226,7 +230,9 @@ const MobileHubNew = props => {
               fullWidth
             />
 
-            <ButtonSubmitWithLoaderSpinner buttonLabel="Enviar" disableCheckerFn={disableCheckerFn} />
+            <ButtonSubmitWithLoaderSpinner
+              buttonLabel={t('SEND_SMS_BUTTON_LABEL')}
+              disableCheckerFn={disableCheckerFn} />
           </form>
         </div>
       }

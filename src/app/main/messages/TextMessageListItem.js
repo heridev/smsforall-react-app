@@ -1,9 +1,10 @@
+import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
-import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
   labelContainer: {
@@ -44,6 +45,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
+const RenderProcessedBy = props => {
+  const processedBy = props.textMessageAttrs.processed_by_sms_mobile_hub;
+  const processedByText = props.processedByText;
+  if (!(processedBy && processedBy.data)) return null;
+
+  return (
+    <Typography>
+      <b>{processedByText}: </b>{processedBy.data.attributes.device_name}
+    </Typography>
+  );
+};
+
 const TextMessageListItem = props => {
   const {
     textMessage: { attributes: textMessageAttrs }
@@ -51,12 +65,7 @@ const TextMessageListItem = props => {
   const classes = useStyles(props);
   const checked = false;
 
-  const renderProcessedBy = textMessageAttrs => {
-    const processedBy = textMessageAttrs.processed_by_sms_mobile_hub;
-    if (!(processedBy && processedBy.data)) return null;
-
-    return processedBy.data.attributes.device_name;
-  };
+  const { t } = useTranslation('textMessagesAppTranslations');
 
   return (
     <ListItem
@@ -83,7 +92,7 @@ const TextMessageListItem = props => {
       <div className="flex flex-1 flex-col relative overflow-hidden">
         <div className="flex items-center justify-between px-16 pb-8">
           <div className="flex items-center">
-            <Typography variant="subtitle1">{textMessageAttrs.sms_number}</Typography>
+            <Typography>{textMessageAttrs.sms_number}</Typography>
           </div>
 
           <div className="flex items-center">
@@ -93,13 +102,15 @@ const TextMessageListItem = props => {
 
         <div className="flex items-center justify-between px-16 pb-8">
           <div className="flex items-center">
-            <Typography>{textMessageAttrs.sms_content}</Typography>
+            <Typography><b>{t('SMS_CONTENT')}: </b> {textMessageAttrs.sms_content}</Typography>
           </div>
         </div>
 
         <div className="flex px-16 justify-between">
           <div className="flex">
-            <Typography><b>Processed by: </b>{renderProcessedBy(textMessageAttrs)}</Typography>
+            <RenderProcessedBy
+              processedByText={t('PROCESSED_BY_HUB')}
+              textMessageAttrs={textMessageAttrs} />
           </div>
 
           <div className="flex px-12">

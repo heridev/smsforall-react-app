@@ -13,6 +13,7 @@ import CountryAutocompleteSelect from 'app/common/CountryAutocompleteSelect';
 import { createSmsMobileHub } from './mobile_hubs.actions';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { hasValidationErrors, showValidationErrorMessage } from 'app/common/UtilsCollection';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
   layoutRoot: {
@@ -37,6 +38,7 @@ const MobileHubNew = props => {
   const classes = useStyles();
   const theme = useTheme();
   const [internationalCode, setInternationalCodeValue] = useState(props.userData.country_international_code);
+  const { t } = useTranslation('mobileHubTranslations');
 
   const { form, handleChange, handleChangeAutocomplete } = useForm({
     country_international_code: internationalCode,
@@ -92,13 +94,15 @@ const MobileHubNew = props => {
               color="inherit"
             >
               <Icon className="text-20">{theme.direction === 'ltr' ? 'arrow_back' : 'arrow_forward'}</Icon>
-              <span className="mx-4">Ver todos mis dispositivos</span>
+              <span className="mx-4">{t('LIST_ALL_MY_DEVICES')}</span>
             </Typography>
           </FuseAnimate>
 
           <div className="flex flex-col min-w-0 items-center sm:items-start">
             <FuseAnimate animation="transition.slideLeftIn" delay={50}>
-              <Typography className="text-16 sm:text-20 truncate">Dar de alta nuevo dispositivo</Typography>
+              <Typography className="text-16 sm:text-20 truncate">
+                {t('ADD_NEW_HUB_DEVICE')}
+              </Typography>
             </FuseAnimate>
           </div>
         </div>
@@ -115,7 +119,7 @@ const MobileHubNew = props => {
               error={hasValidationErrors(props.validationErrors, 'device_name')}
               helperText={showValidationErrorMessage(props.validationErrors, 'device_name')}
               className="mb-16"
-              label="Nombre del dispositivo"
+              label={t('NAME_OF_DEVICE')}
               autoFocus
               type="name"
               name="device_name"
@@ -130,21 +134,21 @@ const MobileHubNew = props => {
               onAutocompleteChange={onAutocompleteChange}
               onDisableClearable
               defaultIntCode={internationalCode}
-              labelProperty="Busca el código de tu país"
+              labelProperty={t('SEARCH_YOUR_COUNTRY_CODE')}
               className="mb-16"
             />
 
             <Typography className="mb-16" variant="body2">
-              Utilizaremos este número para confirmar el dispositivo
+              {t('WE_WILL_CONFIRM_NUMBER_PART_1')}
               <br />
-              <strong>Por favor incluye el código de área local</strong>
+              <strong>{t('PLEASE_INCLUDE_LOCAL_CODE')}</strong>
             </Typography>
 
             <TextField
               error={hasValidationErrors(props.validationErrors, 'device_number')}
               helperText={showValidationErrorMessage(props.validationErrors, 'device_number')}
               className="mb-16"
-              label="Numero de Celular(solo números)"
+              label={t('SMS_HUB_PHONE_NUMBER_TWO')}
               type="number"
               name="device_number"
               value={form.device_number}
@@ -154,7 +158,9 @@ const MobileHubNew = props => {
               fullWidth
             />
 
-            <ButtonSubmitWithLoaderSpinner buttonLabel="Dar de Alta" disableCheckerFn={disableCheckerFn} />
+            <ButtonSubmitWithLoaderSpinner
+              buttonLabel={t('CREATE_DEVICE_BUTTON_FORM')}
+              disableCheckerFn={disableCheckerFn} />
           </form>
         </div>
       }

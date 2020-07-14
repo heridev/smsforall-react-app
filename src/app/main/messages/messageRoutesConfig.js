@@ -1,9 +1,9 @@
 import React from 'react';
-import i18next from 'i18next';
 import { authRoles } from 'app/auth';
 import NewTextMessage from './NewTextMessage';
 // import MobileHubDetails from './MobileHubDetails';
 import TextMessageApp from './TextMessageApp';
+import i18next from 'i18next';
 import en from './i18n/en';
 import es from './i18n/es';
 
