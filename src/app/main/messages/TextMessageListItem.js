@@ -55,7 +55,7 @@ const TextMessageListItem = props => {
     const processedBy = textMessageAttrs.processed_by_sms_mobile_hub;
     if (!(processedBy && processedBy.data)) return null;
 
-    return `Processed by: ${processedBy.data.attributes.device_name}`;
+    return processedBy.data.attributes.device_name;
   };
 
   return (
@@ -87,10 +87,6 @@ const TextMessageListItem = props => {
           </div>
 
           <div className="flex items-center">
-            <Typography variant="subtitle1">{renderProcessedBy(textMessageAttrs)}</Typography>
-          </div>
-
-          <div className="flex items-center">
             <Typography>{textMessageAttrs.decorated_delivered_at}</Typography>
           </div>
         </div>
@@ -101,12 +97,12 @@ const TextMessageListItem = props => {
           </div>
         </div>
 
-        <div className="flex justify-end pl-12">
-          <div className="flex items-center pl-16 hidden">
-            <Typography variant="subtitle1">{textMessageAttrs.sms_number}</Typography>
+        <div className="flex px-16 justify-between">
+          <div className="flex">
+            <Typography><b>Processed by: </b>{renderProcessedBy(textMessageAttrs)}</Typography>
           </div>
 
-          <div className="flex justify-end px-12">
+          <div className="flex px-12">
             <div className={clsx(classes.labelContainer, 'mx-2 mt-4')}>
               <div className={classes.color} style={{ backgroundColor: '#388E3C' }} />
               <div>{textMessageAttrs.decorated_status}</div>
