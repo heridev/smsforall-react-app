@@ -53,8 +53,6 @@ const TextMessageListItem = props => {
 
   const renderProcessedBy = textMessageAttrs => {
     const processedBy = textMessageAttrs.processed_by_sms_mobile_hub;
-    const decoratedStatus = textMessageAttrs.decorated_status;
-    // if (decoratedStatus === 'delivered') return null;
     if (!(processedBy && processedBy.data)) return null;
 
     return `Processed by: ${processedBy.data.attributes.device_name}`;
