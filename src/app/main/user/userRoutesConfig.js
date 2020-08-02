@@ -15,7 +15,8 @@ i18next.addResourceBundle('es', 'userSettingAppTranslations', es);
 
 const userRoutesConfig = {
   settings: {
-    layout: {}
+    layout: {},
+    customScrollbars: false,
   },
   auth: authRoles.customer,
   routes: [

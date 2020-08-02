@@ -33,6 +33,10 @@ const useStyles = makeStyles({
   deleteHub: {
     color: 'white',
     background: 'red'
+  },
+  activationPin: {
+    fontFamily: 'initial',
+    fontSize: '50px'
   }
 });
 
@@ -134,7 +138,9 @@ const MobileHubDetails = props => {
       content={
         <div className="p-24">
           <h4>
-            {t('ACTIVATION_PIN_NUMBER')}: {' '}
+            {t('ACTIVATION_PIN_NUMBER')}
+          </h4>
+          <h4 className={classes.activationPin}>
             <strong>{mobileHubDetails && mobileHubDetails.temporal_password}</strong>
           </h4>
           <Divider className={classes.dividerStyle} />

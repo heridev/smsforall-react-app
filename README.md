@@ -28,7 +28,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 1. Set the following env variables:
 make sure you have the following env variables in the `.env` file:
 ```
-REACT_APP_API_URL=http://localhost:3000
+export REACT_APP_API_URL=http://localhost:3030
 ```
 Note: If you want to add any new ones make sure they start with REACT_APP as
 the template uses the `react-react-app` script https://create-react-app.dev/docs/adding-custom-environment-variables/
