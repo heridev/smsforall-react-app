@@ -7,6 +7,7 @@ import DashboardPagesConfig from 'app/main/dashboard/DashboardPagesConfig';
 import mobileHubConfig from 'app/main/mobile_hubs/mobileHubConfig';
 import messageRoutesConfig from 'app/main/messages/messageRoutesConfig';
 import userRoutesConfig from 'app/main/user/userRoutesConfig';
+import ConfirmPinNumberPageConfig from 'app/main/user/confirmationAccount/ConfirmPinNumberPageConfig';
 
 const routeConfigs = [
   ...authRoutesConfig,
@@ -14,7 +15,8 @@ const routeConfigs = [
   DashboardPagesConfig,
   mobileHubConfig,
   messageRoutesConfig,
-  userRoutesConfig
+  userRoutesConfig,
+  ConfirmPinNumberPageConfig
 ];
 
 const routes = [

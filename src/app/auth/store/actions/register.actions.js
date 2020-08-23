@@ -2,8 +2,8 @@ import _ from '@lodash';
 import jwtService from 'app/services/jwtService';
 import history from '@history';
 import { showMessage } from 'app/store/actions/fuse/message.actions';
-import { setUserDataTest } from './user.actions';
 import { hideLoadingSpinner } from 'app/store/actions/fuse/site.actions';
+import { setUserDataTest } from './user.actions';
 
 export const REGISTER_ERROR = 'REGISTER_ERROR';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -16,7 +16,7 @@ export function submitRegister(userData) {
         dispatch(setUserDataTest(userResponse.userAttributes));
 
         history.push({
-          pathname: '/'
+          pathname: '/user/confirm-pin-page'
         });
 
         dispatch(hideLoadingSpinner());

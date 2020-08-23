@@ -23,7 +23,7 @@ class JwtService extends FuseUtils.EventEmitter {
             this.setSession(null);
           }
           // Note: this will trigger the catch function on the promise
-          throw(err.response);
+          throw err.response;
         });
       }
     );
@@ -49,7 +49,8 @@ class JwtService extends FuseUtils.EventEmitter {
 
   createUser = data => {
     return new Promise((resolve, reject) => {
-      axios.post(apiUrl('user_registrations'), data)
+      axios
+        .post(apiUrl('user_registrations'), data)
         .then(response => {
           const {
             data: {
@@ -75,7 +76,20 @@ class JwtService extends FuseUtils.EventEmitter {
           }
         })
         .catch(errorResponse => {
-          reject(errorResponse)
+          reject(errorResponse);
+        });
+    });
+  };
+
+  confirmPinNumber = data => {
+    return new Promise((resolve, reject) => {
+      axios
+        .post(apiUrl('user_sessions/activate_account'), data)
+        .then(response => {
+          resolve(response);
+        })
+        .catch(errorResponse => {
+          reject(errorResponse);
         });
     });
   };
@@ -112,7 +126,7 @@ class JwtService extends FuseUtils.EventEmitter {
           }
         })
         .catch(errorResponse => {
-          reject(errorResponse)
+          reject(errorResponse);
         });
     });
   };

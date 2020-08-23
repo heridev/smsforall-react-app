@@ -1,8 +1,8 @@
 import jwtService from 'app/services/jwtService';
 import history from '@history';
-import { setUserDataTest } from './user.actions';
 import { showMessage } from 'app/store/actions/fuse/message.actions';
 import { hideLoadingSpinner } from 'app/store/actions/fuse/site.actions';
+import { setUserDataTest } from './user.actions';
 
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -14,8 +14,11 @@ export function submitLogin({ email, password }) {
       .then(userResponse => {
         dispatch(setUserDataTest(userResponse.userAttributes));
 
+        let defaultRoute = '/';
+        if (userResponse.userAttributes['pending_confirmation?']) defaultRoute = '/user/confirm-pin-page';
+
         history.push({
-          pathname: '/'
+          pathname: defaultRoute
         });
 
         dispatch(hideLoadingSpinner());

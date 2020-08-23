@@ -1,4 +1,15 @@
 ### React app application for Smsparatodos.com
+## Available Scripts
+
+### How run the project locally
+Run
+```
+export REACT_APP_API_URL=http://localhost:3030
+yarn start
+```
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
 #### Description
 This is the application and frontend code for smsparatodos.com and in the case
 that you want to add any new features that the original fuse react app includes
@@ -21,19 +32,14 @@ If are having troubles with that configuration feel free to open the .eslintrc f
 ### Original content including after buying and downloading this template from envato
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+the template uses the `react-react-app` script https://create-react-app.dev/docs/adding-custom-environment-variables/
+
 ## Available Scripts
 
 ### How run the project locally
 
-1. Set the following env variables:
-make sure you have the following env variables in the `.env` file:
-```
+Run
 export REACT_APP_API_URL=http://localhost:3030
-```
-Note: If you want to add any new ones make sure they start with REACT_APP as
-the template uses the `react-react-app` script https://create-react-app.dev/docs/adding-custom-environment-variables/
-2. Run
-```
 yarn start
 ```
 

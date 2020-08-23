@@ -4,6 +4,7 @@ import jwtService from 'app/services/jwtService';
 import * as Actions from 'app/store/actions';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import history from '@history';
 
 class Auth extends Component {
   state = {
@@ -23,6 +24,12 @@ class Auth extends Component {
           .then(user => {
             this.props.setUserDataTest(user);
             this.setState({ waitAuthCheck: false });
+
+            if (user['pending_confirmation?']) {
+              history.push({
+                pathname: '/user/confirm-pin-page'
+              });
+            }
 
             resolve();
 
