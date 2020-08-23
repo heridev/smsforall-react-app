@@ -1,4 +1,3 @@
-import _ from '@lodash';
 import jwtService from 'app/services/jwtService';
 import history from '@history';
 import { showMessage } from 'app/store/actions/fuse/message.actions';

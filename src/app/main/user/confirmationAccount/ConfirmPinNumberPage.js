@@ -2,19 +2,15 @@ import FuseAnimate from '@fuse/core/FuseAnimate';
 import { useForm } from '@fuse/hooks';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import { darken } from '@material-ui/core/styles/colorManipulator';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { showLoadingSpinner } from 'app/store/actions/fuse/site.actions';
-import CountryAutocompleteSelect from 'app/common/CountryAutocompleteSelect';
 import ButtonSubmitWithLoaderSpinner from 'app/common/ButtonSubmitWithLoaderSpinner';
 import { confirmPinNumber } from './confirmation_account.actions';
 
@@ -28,9 +24,7 @@ const useStyles = makeStyles(theme => ({
 const ConfirmPinNumberPage = props => {
   const classes = useStyles();
 
-  const [internationalCode, setInternationalCodeValue] = useState(null);
-
-  const { form, handleChange, handleChangeAutocomplete } = useForm({
+  const { form, handleChange } = useForm({
     user_pin_number: ''
   });
 
