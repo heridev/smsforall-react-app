@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MobileHubNew = props => {
-  const CHARACTER_LIMIT = 160;
+  const CHARACTER_LIMIT = 1000;
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
