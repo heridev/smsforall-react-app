@@ -47,7 +47,6 @@ const navigationConfig = [
         translate: 'MANAGE_TEXT_MESSAGES',
         type: 'collapse',
         icon: 'message',
-        url: '/sms-notifications/list/out',
         children: [
           {
             id: 'sms-notifications-lists',

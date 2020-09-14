@@ -1,7 +1,9 @@
 import * as Actions from 'app/store/actions/fuse';
 
 const initialState = {
-  is_loading_spinner_visible: false
+  is_loading_spinner_visible: false,
+  http_request_in_progress: false,
+  http_request_response_details: {}
 };
 
 const site = (state = initialState, action) => {
@@ -16,6 +18,21 @@ const site = (state = initialState, action) => {
       return {
         ...state,
         is_loading_spinner_visible: false
+      };
+    }
+
+    case Actions.HTTP_REQUEST_STARTS: {
+      return {
+        ...state,
+        http_request_in_progress: true,
+        http_request_response_details: {}
+      };
+    }
+    case Actions.HTTP_REQUEST_FINISHES: {
+      return {
+        ...state,
+        http_request_in_progress: false,
+        http_request_response_details: action.payload
       };
     }
     default: {

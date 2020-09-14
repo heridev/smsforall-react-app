@@ -13,3 +13,17 @@ export const showLoadingSpinner = () => dispatch => {
   });
 };
 
+export const HTTP_REQUEST_STARTS = '[HTTP_REQUEST] STARTS';
+export const httpRequestStarts = () => dispatch => {
+  return dispatch({
+    type: HTTP_REQUEST_STARTS
+  });
+};
+
+export const HTTP_REQUEST_FINISHES = '[HTTP_REQUEST] FINISHES';
+export const httpRequestFinishes = (additionalData = {}) => dispatch => {
+  return dispatch({
+    type: HTTP_REQUEST_FINISHES,
+    payload: additionalData
+  });
+};
