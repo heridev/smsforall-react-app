@@ -9,14 +9,14 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { showLoadingSpinner } from 'app/store/actions/fuse/site.actions';
+import { showLoadingSpinner, httpRequestStarts } from 'app/store/actions/fuse/site.actions';
 import ButtonSubmitWithLoaderSpinner from 'app/common/ButtonSubmitWithLoaderSpinner';
 import CountryAutocompleteSelect from 'app/common/CountryAutocompleteSelect';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useDispatch, useSelector, connect } from 'react-redux';
 import { getSmsMobileHubCollection } from 'app/main/mobile_hubs/mobile_hubs.actions';
 import FuseLoading from '@fuse/core/FuseLoading';
-import { createTextMessage, setTextMessageCreationAs } from './text_messages.actions';
+import { createTextMessage } from './text_messages.actions';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
@@ -38,12 +38,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MobileHubNew = props => {
+const NewTextMessage = props => {
   const CHARACTER_LIMIT = 1000;
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
   const [internationalCode, setInternationalCodeValue] = useState(props.userData.country_international_code);
+  const [submitted, setFormSubmitted] = useState('initial');
   const { t } = useTranslation('textMessagesAppTranslations');
 
   useEffect(() => {
@@ -54,7 +55,6 @@ const MobileHubNew = props => {
   const mobileHubCollection = useSelector(({ mobileHubs }) => mobileHubs.mobileHubCollection);
 
   const { form, handleChange, handleChangeAutocomplete, resetForm } = useForm({
-  // const { setInForm, form, handleChange, handleChangeAutocomplete, resetForm } = useForm({
     country_international_code: internationalCode,
     sms_content: '',
     sms_number: '',
@@ -98,8 +98,9 @@ const MobileHubNew = props => {
         sms_content: form.sms_content
       }
     };
-    props.onCreateTextMessage(smsTextMessageData);
     props.onShowLoadingSpinner();
+    props.onHttpRequestStarts();
+    props.onCreateTextMessage(smsTextMessageData);
     ev.preventDefault();
   };
 
@@ -107,12 +108,15 @@ const MobileHubNew = props => {
     return `${form.sms_content.length}/${CHARACTER_LIMIT}`;
   };
 
-  if (props.textMessageCreationStatus === 'success') {
-    resetForm();
-    props.onSetTextMessageCreationAs('');
-  }
-
   if (props.isLoadingSpinnerVisible) return <FuseLoading />;
+
+  if (
+    props.httpRequestResponseDetails.status !== undefined &&
+    submitted !== props.httpRequestResponseDetails.status
+  ) {
+    resetForm();
+    setFormSubmitted(props.httpRequestResponseDetails.status);
+  }
 
   return (
     <FusePageCarded
@@ -246,19 +250,21 @@ const MobileHubNew = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCreateTextMessage: formData => dispatch(createTextMessage(formData)),
+    onCreateTextMessage: formData => {
+      return dispatch(createTextMessage(formData));
+    },
     onShowLoadingSpinner: () => dispatch(showLoadingSpinner()),
-    onSetTextMessageCreationAs: (status) => dispatch(setTextMessageCreationAs())
+    onHttpRequestStarts: () => dispatch(httpRequestStarts())
   };
 };
 
 const mapStateToProps = state => {
   return {
     isLoadingSpinnerVisible: state.fuse.site.is_loading_spinner_visible,
+    httpRequestResponseDetails: state.fuse.site.http_request_response_details,
     validationErrors: state.utilsReducers.validationErrors,
-    userData: state.auth.user.data,
-    textMessageCreationStatus: state.textMessages.textMessageCreationStatus
+    userData: state.auth.user.data
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MobileHubNew);
+export default connect(mapStateToProps, mapDispatchToProps)(NewTextMessage);

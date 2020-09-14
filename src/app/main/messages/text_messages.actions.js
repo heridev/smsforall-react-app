@@ -3,22 +3,15 @@ import { AxiosPostRequest, AxiosGetRequest } from 'app/common/AxiosRequest';
 // import { AxiosPostRequest } from 'app/common/AxiosRequest';
 // import history from '@history';
 import { addBackendValidationErrors } from 'app/common/utils.actions';
+import { hideLoadingSpinner, httpRequestFinishes } from 'app/store/actions/fuse/site.actions';
 
 // export const ADD_BACKEND_VALIDATION_ERRORS = '[FORM_VALIDATION] ADD';
 // export const CLEAR_BACKEND_VALIDATION_ERRORS = '[FORM_VALIDATION] CLEAR';
 export const SET_TEXT_MESSAGE_DETAILS = '[TEXT_MESSAGE] SET';
 export const SET_TEXT_MESSAGES_COLLECTION = '[TEXT_MESSAGE] SET_COLLECTION';
 export const SET_CREATE_TEXT_MESSAGE_AS_SUCCESS = '[TEXT_MESSAGE] CREATE_TEXT_SUCESS';
-export const SET_TEXT_MESSAGE_CREATION_AS = '[TEXT_MESSAGE] SET_CREATION_AS';
 export const SET_TEXT_MESSAGE_SEARCH = '[TEXT_MESSAGE] SET_TEXT_SEARCH';
 export const SET_TEXT_MESSAGE_SEARCH_PARAMS = '[TEXT_MESSAGE] SET_TEXT_SEARCH_PARAMS';
-
-export const setTextMessageCreationAs = (status) => dispatch => {
-  return dispatch({
-    type: SET_TEXT_MESSAGE_CREATION_AS,
-    payload: status
-  });
-};
 
 export const setTextMessagesCollection = textMessageList => dispatch => {
   return dispatch({
@@ -48,10 +41,10 @@ export const setTextMessageSearchParams = params => dispatch => {
 // };
 
 export const createTextMessage = dataParams => {
+  const hideLoaderSpinnerAutomatically = false;
   return dispatch =>
-    AxiosPostRequest('sms_notifications', dataParams)
+    AxiosPostRequest('sms_notifications', dataParams, hideLoaderSpinnerAutomatically)
       .then(response => {
-        dispatch(setTextMessageCreationAs('success'));
         dispatch(
           showMessage({
             message: 'El mensaje se ha creado correctamente, en breve será procesado',
@@ -59,6 +52,11 @@ export const createTextMessage = dataParams => {
             autoHideDuration: 4000
           })
         );
+        dispatch(hideLoadingSpinner());
+        const {
+          data: { data: smsNotificationData }
+        } = response;
+        dispatch(httpRequestFinishes({ status: `success_${smsNotificationData.id}` }));
       })
       .catch(errorResponse => {
         dispatch(
@@ -69,6 +67,7 @@ export const createTextMessage = dataParams => {
           })
         );
         dispatch(addBackendValidationErrors(errorResponse.data.data.errors));
+        dispatch(hideLoadingSpinner());
       });
 };
 

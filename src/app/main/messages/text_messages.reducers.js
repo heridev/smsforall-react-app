@@ -1,8 +1,6 @@
 import _ from '@lodash';
 import {
-  // SET_TEXT_MESSAGE_DETAILS,
   SET_TEXT_MESSAGES_COLLECTION,
-  SET_TEXT_MESSAGE_CREATION_AS,
   SET_TEXT_MESSAGE_SEARCH,
   SET_TEXT_MESSAGE_SEARCH_PARAMS
 } from './text_messages.actions';
@@ -29,12 +27,6 @@ const textMessages = (state = initialState, action) => {
       return {
         ...state,
         textSearch: action.payload
-      };
-    }
-    case SET_TEXT_MESSAGE_CREATION_AS: {
-      return {
-        ...state,
-        textMessageCreationStatus: action.payload
       };
     }
     case SET_TEXT_MESSAGES_COLLECTION: {
