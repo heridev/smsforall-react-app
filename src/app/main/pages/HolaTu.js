@@ -4,19 +4,15 @@ import Icon from '@material-ui/core/Icon';
 import { useForm } from '@fuse/hooks';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { showLoadingSpinner, httpRequestStarts } from 'app/store/actions/fuse/site.actions';
 import ButtonSubmitWithLoaderSpinner from 'app/common/ButtonSubmitWithLoaderSpinner';
 import CountryAutocompleteSelect from 'app/common/CountryAutocompleteSelect';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useDispatch, useSelector, connect } from 'react-redux';
-import { getSmsMobileHubCollection } from 'app/main/mobile_hubs/mobile_hubs.actions';
+import { connect } from 'react-redux';
 import FuseLoading from '@fuse/core/FuseLoading';
-import { createTextMessage } from './text_messages.actions';
+import { createTextMessageFromPublic } from 'app/main/messages/text_messages.actions';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
@@ -38,39 +34,25 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const NewTextMessage = props => {
+const HolaTu = props => {
   const CHARACTER_LIMIT = 1000;
   const classes = useStyles();
   const theme = useTheme();
-  const dispatch = useDispatch();
-  const [internationalCode, setInternationalCodeValue] = useState(props.userData.country_international_code);
+  const [internationalCode, setInternationalCodeValue] = useState('52');
   const [submitted, setFormSubmitted] = useState('initial');
   const { t } = useTranslation('textMessagesAppTranslations');
-
-  useEffect(() => {
-    dispatch(showLoadingSpinner());
-    dispatch(getSmsMobileHubCollection('/activated'));
-  }, [dispatch]);
-
-  const mobileHubCollection = useSelector(({ mobileHubs }) => mobileHubs.mobileHubCollection);
 
   const { form, handleChange, handleChangeAutocomplete, resetForm } = useForm({
     country_international_code: internationalCode,
     sms_content: '',
-    sms_number: '',
-    sms_type: 'standard_delivery',
-    mobile_hub_uuid: '',
-    mobile_hub: undefined
+    sms_number: ''
   });
 
   const isFormValid = () => {
     const phoneRegex = /[0-9]{7,11}/;
-    const validHubUid = form.mobile_hub_uuid || (mobileHubCollection.length > 0);
     return (
       form.sms_content.length > 0 &&
       internationalCode.length > 0 &&
-      form.sms_type &&
-      validHubUid &&
       form.sms_number &&
       form.sms_number.length > 5 &&
       phoneRegex.test(form.sms_number)
@@ -91,9 +73,7 @@ const NewTextMessage = props => {
 
   const handleSubmit = ev => {
     const smsTextMessageData = {
-      hub_uuid: form.mobile_hub_uuid || mobileHubCollection[0].attributes.uuid,
       sms_notification: {
-        sms_type: form.sms_type,
         sms_number: `+${form.country_international_code}${form.sms_number}`,
         sms_content: form.sms_content
       }
@@ -131,12 +111,12 @@ const NewTextMessage = props => {
               className="normal-case flex items-center sm:mb-12"
               component={Link}
               role="button"
-              to="/mobile-hubs/list"
+              to="/auth/register"
               color="inherit"
             >
               <Icon className="text-20">{theme.direction === 'ltr' ? 'arrow_back' : 'arrow_forward'}</Icon>
               <span className="mx-4">
-                {t('VIEW_ALL_MESSAGES')}
+                {t('REGISTER_AN_ACCOUNT')}
               </span>
             </Typography>
           </FuseAnimate>
@@ -165,47 +145,6 @@ const NewTextMessage = props => {
               labelProperty={t('SEARCH_YOUR_COUNTRY_CODE')}
               className="mb-16"
             />
-
-            <FormControl required variant="outlined">
-              <InputLabel htmlFor="sms-type-native-required">
-                {t('SELECT_DEVICE_FROM')}
-              </InputLabel>
-              <Select
-                label={t('SELECT_DEVICE_FROM')}
-                native
-                value={form.mobile_hub_uuid}
-                onChange={handleChange}
-                className="mb-16"
-                name="mobile_hub_uuid"
-                inputProps={{
-                  id: 'sms-type-native-required'
-                }}
-              >
-                {mobileHubCollection.map(mobileHub=> {
-                  return(<option key={mobileHub.attributes.uuid} value={mobileHub.attributes.uuid}>{`${mobileHub.attributes.device_name} - ${mobileHub.attributes.device_number}`}</option>)
-                })}
-              </Select>
-            </FormControl>
-
-            <FormControl required variant="outlined">
-              <InputLabel htmlFor="sms-type-native-required">
-                {t('SMS_TYPE_LABEL')}
-              </InputLabel>
-              <Select
-                label={t('SMS_TYPE_LABEL')}
-                native
-                value={form.sms_type}
-                onChange={handleChange}
-                className="mb-16"
-                name="sms_type"
-                inputProps={{
-                  id: 'sms-type-native-required'
-                }}
-              >
-                <option value="standard_delivery">Entrega Estandard</option>
-                <option value="urgent_delivery">Entrega inmediata</option>
-              </Select>
-            </FormControl>
 
             <TextField
               className="mb-16"
@@ -251,7 +190,7 @@ const NewTextMessage = props => {
 const mapDispatchToProps = dispatch => {
   return {
     onCreateTextMessage: formData => {
-      return dispatch(createTextMessage(formData));
+      return dispatch(createTextMessageFromPublic(formData));
     },
     onShowLoadingSpinner: () => dispatch(showLoadingSpinner()),
     onHttpRequestStarts: () => dispatch(httpRequestStarts())
@@ -267,5 +206,5 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewTextMessage);
+export default connect(mapStateToProps, mapDispatchToProps)(HolaTu);
 

@@ -12,6 +12,7 @@ const locale = {
   PROCESSED_BY_HUB: 'Processed by',
   SMS_CONTENT: 'Content',
   VIEW_ALL_MESSAGES: 'List all messages',
+  REGISTER_AN_ACCOUNT: 'Register a new account',
   SEND_NEW_TEXT_MESSAGE: 'Send new text message',
   SEARCH_YOUR_COUNTRY_CODE: 'Search your country code',
   SMS_HUB_PHONE_NUMBER: 'Phone number (only numbers)',
