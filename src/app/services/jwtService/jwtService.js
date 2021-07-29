@@ -94,6 +94,19 @@ class JwtService extends FuseUtils.EventEmitter {
     });
   };
 
+  createPublicSmsNotification = data => {
+    return new Promise((resolve, reject) => {
+      axios
+        .post(apiUrl('public_sms_notifications'), data)
+        .then(response => {
+          resolve(response);
+        })
+        .catch(errorResponse => {
+          reject(errorResponse);
+        });
+    });
+  };
+
   signInWithEmailAndPassword = (email, password) => {
     return new Promise((resolve, reject) => {
       axios

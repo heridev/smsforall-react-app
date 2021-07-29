@@ -1,17 +1,32 @@
-import HowItWorks from './HowItWorks';
+import HolaTu from './HolaTu';
 
 const PagesConfig = {
-  settings: {
     settings: {
-      layout: {}
-    },
-
+    layout: {
+      config: {
+        navbar: {
+          display: false
+        },
+        toolbar: {
+          display: false
+        },
+        footer: {
+          display: false
+        },
+        leftSidePanel: {
+          display: false
+        },
+        rightSidePanel: {
+          display: false
+        }
+      }
+    }
   },
   auth: null,
   routes: [
     {
-      path: '/pages/how-it-works',
-      component: HowItWorks
+      path: '/holatu',
+      component: HolaTu
     }
   ]
 };

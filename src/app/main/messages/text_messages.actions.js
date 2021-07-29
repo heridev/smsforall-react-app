@@ -1,7 +1,7 @@
 import { showMessage } from 'app/store/actions/fuse/message.actions';
 import { AxiosPostRequest, AxiosGetRequest } from 'app/common/AxiosRequest';
+import jwtService from 'app/services/jwtService';
 // import { AxiosPostRequest } from 'app/common/AxiosRequest';
-// import history from '@history';
 import { addBackendValidationErrors } from 'app/common/utils.actions';
 import { hideLoadingSpinner, httpRequestFinishes } from 'app/store/actions/fuse/site.actions';
 
@@ -71,6 +71,32 @@ export const createTextMessage = dataParams => {
       });
 };
 
+export const createTextMessageFromPublic = dataParams => {
+  return dispatch =>
+    jwtService
+      .createPublicSmsNotification(dataParams)
+      .then(messageResponse => {
+        dispatch(
+          showMessage({
+            message: 'El mensaje se ha creado correctamente, en breve será procesado',
+            variant: 'success',
+            autoHideDuration: 4000
+          })
+        );
+        dispatch(hideLoadingSpinner());
+        const {
+          data: {
+            data: { requested_time: requestedTime }
+          }
+        } = messageResponse;
+        dispatch(httpRequestFinishes({ status: `success_${requestedTime}` }));
+      })
+      .catch(error => {
+        dispatch(showMessage({ message: 'An error ocurred', variant: 'error', autoHideDuration: 3000 }));
+        dispatch(hideLoadingSpinner());
+      });
+};
+
 // export const getTextMessageDetails = uuid => {
 //   const urlWithUuid = `sms_notifications/${uuid}`;
 //   return dispatch =>
@@ -94,7 +120,7 @@ export const createTextMessage = dataParams => {
 //       });
 // };
 //
-export const getTextMessagesCollection = (params) => {
+export const getTextMessagesCollection = params => {
   return dispatch =>
     AxiosGetRequest('sms_notifications', params)
       .then(response => {
