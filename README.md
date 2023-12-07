@@ -7,6 +7,8 @@ Run
 export REACT_APP_API_URL=http://localhost:3030
 yarn start
 ```
+
+NOTE: As you saw before, the backend API application needs to run in port 3030, find more details in the [Smsforall Rails Backend API](https://github.com/heridev/smsforall-rails-api) repository
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
