@@ -1,7 +1,7 @@
 ### React app application for https://app.smsforall.org
 ## Available Scripts
 
-### How run the project locally
+### How to run the project locally?
 Run
 ```
 export REACT_APP_API_URL=http://localhost:3030
@@ -15,7 +15,7 @@ This is the application and frontend code for smsparatodos.com and in the case
 that you want to add any new features that the original fuse react app includes
 you can run the application demo stored in the following location
 ```
-/Users/heridev/projects/personal/fuse_react_v4.1.5_template/fuse_react_demo
+/Users/heribertopersonalfolder/fuse_react_v4.1.5_template/fuse_react_demo
 ```
 
 In the case that you do not find that directory in your computer anymore, remember
@@ -39,6 +39,7 @@ the template uses the `react-react-app` script https://create-react-app.dev/docs
 ### How run the project locally
 
 Run
+```
 export REACT_APP_API_URL=http://localhost:3030
 yarn start
 ```
