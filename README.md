@@ -1,4 +1,4 @@
-### React app application for Smsparatodos.com
+### React app application for https://app.smsforall.org
 ## Available Scripts
 
 ### How run the project locally
