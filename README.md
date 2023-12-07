@@ -11,9 +11,7 @@ Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 #### Description
-This is the application and frontend code for smsparatodos.com and in the case
-that you want to add any new features that the original fuse react app includes
-you can run the application demo stored in the following location
+This is the application and frontend code for https://app.smsforall.org. If you want to add any new features that the original fuse react app includes, you can run the application demo stored in the following location
 ```
 /Users/heribertopersonalfolder/fuse_react_v4.1.5_template/fuse_react_demo
 ```
@@ -27,9 +25,9 @@ There is a zip file including all the sources for that template, also
 you can download it again from envato.com
 
 ### Linters, eslint
-If are having troubles with that configuration feel free to open the .eslintrc file and update accordingly to your needs
+If are having trouble with that configuration feel free to open the .eslintrc file and update it accordingly to your needs
 
-### Original content including after buying and downloading this template from envato
+### Original content including after buying and downloading this template from Envato
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 the template uses the `react-react-app` script https://create-react-app.dev/docs/adding-custom-environment-variables/
