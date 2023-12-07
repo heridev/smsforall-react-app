@@ -36,7 +36,7 @@ the template uses the `react-react-app` script https://create-react-app.dev/docs
 
 ## Available Scripts
 
-### How run the project locally
+### How to run the project locally?
 
 Run
 ```
