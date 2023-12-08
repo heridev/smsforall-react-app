@@ -5,6 +5,7 @@
 Run
 ```
 export REACT_APP_API_URL=http://localhost:3030
+yarn install
 yarn start
 ```
 
