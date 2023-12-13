@@ -39,12 +39,12 @@ const ForgotPasswordPage = () => {
 				<FuseAnimate animation="transition.expandIn">
 					<Card className="w-full max-w-384">
 						<CardContent className="flex flex-col items-center justify-center p-32">
-							<div className="w-128 m-32">
-								<img src="assets/images/logos/1x/smsparatodos.png" alt="logo sms para todos" />
+							<div className="w-300">
+								<img className="w-200 m-10" src="assets/images/logos/smsforall-horizontal@4x.png" alt="logo smsforall.org" />
 							</div>
 
 							<Typography variant="h6" className="mt-16 mb-32">
-								Recuperación de Contraseña
+								Recover password
 							</Typography>
 
 							<form
@@ -55,7 +55,7 @@ const ForgotPasswordPage = () => {
 							>
 								<TextField
 									className="mb-16"
-									label="Correo"
+									label="Email"
 									autoFocus
 									type="email"
 									name="email"
@@ -74,13 +74,13 @@ const ForgotPasswordPage = () => {
 									disabled={!isFormValid()}
 									type="submit"
 								>
-									Solicitar cambio de Contraseña
+									Recover password(in construction...)
 								</Button>
 							</form>
 
 							<div className="flex flex-col items-center justify-center pt-32 pb-24">
 								<Link className="font-medium" to="/auth/login">
-									Regresar a la pagina de inicio de sesión
+									Log in
 								</Link>
 							</div>
 						</CardContent>

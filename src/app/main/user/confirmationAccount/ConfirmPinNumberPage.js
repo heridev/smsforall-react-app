@@ -51,15 +51,16 @@ const ConfirmPinNumberPage = props => {
               <img className="w-128 m-32" src="assets/images/logos/1x/smsparatodos.png" alt="logo smsparatodos" />
 
               <Typography variant="h6" className="mt-16">
-                Confirmar Pin de Activación
+                Confirmation token
               </Typography>
 
               <Typography variant="p" className="mt-10 mb-20">
-                Te enviamos un pin de activación al celular {props.userData.find_international_number}, en caso de no
-                recibirlo en un tiempo mayor a 5 minutos, contactános desde nuestro chat en
-                <Link className="font-medium" to="https://smsparatodos.com">
+                We sent an activation token to your phone {props.userData.find_international_number}, if you don't receive
+                that SMS with the token in more than 5 minutes, please reach out to us via email to hi@smsforall.or
+                or using the contact information at https://smsforall.org/about-sms-for-all/#contact-form
+                <Link className="font-medium" to="https://smsforall.org/about-sms-for-all/#contact-formm">
                   {' '}
-                  https://smsparatodos.com
+                  https://smsforall.org/about-sms-for-all/#contact-formm
                 </Link>
               </Typography>
 
@@ -81,7 +82,7 @@ const ConfirmPinNumberPage = props => {
                   fullWidth
                 />
 
-                <ButtonSubmitWithLoaderSpinner buttonLabel="Confirmar Código" disableCheckerFn={disableCheckerFn} />
+                <ButtonSubmitWithLoaderSpinner buttonLabel="Confirm token" disableCheckerFn={disableCheckerFn} />
               </form>
             </CardContent>
           </Card>

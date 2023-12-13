@@ -21,7 +21,7 @@ const ButtonSubmitWithLoaderSpinner = props => {
   const defaultClassName = props.className || 'w-224 mx-auto mt-16';
   const defaultVariant = props.variantName || 'contained';
   const defaultButtonType = props.buttonType || 'submit';
-  const defaultButtonLabel = props.buttonLabel || 'Iniciar sesión';
+  const defaultButtonLabel = props.buttonLabel || 'Log in';
   const defaultDisableFn = () => {
     return (props.disableCheckerFn && props.disableCheckerFn()) || false;
   };

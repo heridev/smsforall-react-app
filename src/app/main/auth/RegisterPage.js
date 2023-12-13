@@ -55,13 +55,13 @@ const RegisterPage = props => {
   const acceptTermsAndConditionsLabel = () => {
     return (
       <span>
-        He leído y acepto los{' '}
+        I have read the {' '}
         <a target="_blank" rel="noopener noreferrer" href="https://smsparatodos.com/terminos-y-condiciones-de-uso">
-          términos, condiciones{' '}
+          terms and conditions (Spanish) {' '}
         </a>
-        y{' '}
+        and {' '}
         <a target="_blank" rel="noopener noreferrer" href="https://smsparatodos.com/politicas-de-privacidad-de-datos">
-          políticas de privacidad
+          Privacy policies (Spanish)
         </a>
       </span>
     );
@@ -93,10 +93,10 @@ const RegisterPage = props => {
         <FuseAnimate animation="transition.expandIn">
           <Card className="w-full max-w-384">
             <CardContent className="flex flex-col items-center justify-center p-32">
-              <img className="w-128 m-32" src="assets/images/logos/1x/smsparatodos.png" alt="logo smsparatodos" />
+              <img className="w-256 m-10" src="assets/images/logos/smsforall-horizontal@4x.png" alt="logo smsforall.org" />
 
               <Typography variant="h6" className="mt-16 mb-32">
-                Crear nueva cuenta
+                Register a new account
               </Typography>
 
               <form
@@ -107,7 +107,7 @@ const RegisterPage = props => {
               >
                 <TextField
                   className="mb-16"
-                  label="Nombre Completo"
+                  label="Your name"
                   autoFocus
                   type="name"
                   name="name"
@@ -122,19 +122,19 @@ const RegisterPage = props => {
                   onAutocompleteChange={onAutocompleteChange}
                   defaultIntCode={internationalCode}
                   onDisableClearable
-                  labelProperty="Busca el código de tu país"
+                  labelProperty="International country code"
                   className="mb-16"
                 />
 
                 <Typography className="mb-16" variant="body2">
-                  Utilizaremos este número para confirmación
+                  We will use this phone to send a confirmation code
                   <br />
-                  <strong>Por favor incluye el código de área local</strong>
+                  <strong>Please include the local area code as well</strong>
                 </Typography>
 
                 <TextField
                   className="mb-16"
-                  label="Numero de Celular(solo números)"
+                  label="Your phone number(only numbers)"
                   type="number"
                   name="mobile_number"
                   value={form.mobile_number}
@@ -146,7 +146,7 @@ const RegisterPage = props => {
 
                 <TextField
                   className="mb-16"
-                  label="Correo"
+                  label="Email"
                   type="email"
                   name="email"
                   value={form.email}
@@ -158,7 +158,7 @@ const RegisterPage = props => {
 
                 <TextField
                   className="mb-16"
-                  label="Contraseña"
+                  label="Password"
                   type="password"
                   name="password"
                   value={form.password}
@@ -170,7 +170,7 @@ const RegisterPage = props => {
 
                 <TextField
                   className="mb-16"
-                  label="Contraseña (Confirmación)"
+                  label="Password(confirmation)"
                   type="password"
                   name="passwordConfirm"
                   value={form.passwordConfirm}
@@ -193,13 +193,13 @@ const RegisterPage = props => {
                   />
                 </FormControl>
 
-                <ButtonSubmitWithLoaderSpinner buttonLabel="Registrar cuenta" disableCheckerFn={disableCheckerFn} />
+                <ButtonSubmitWithLoaderSpinner buttonLabel="Register account" disableCheckerFn={disableCheckerFn} />
               </form>
 
               <div className="flex flex-col items-center justify-center pt-32 pb-24">
-                <span className="font-medium">Ya tienes una cuenta?</span>
+                <span className="font-medium">Don't have an account?</span>
                 <Link className="font-medium" to="/auth/login">
-                  Iniciar sesión
+                  Log in
                 </Link>
               </div>
             </CardContent>

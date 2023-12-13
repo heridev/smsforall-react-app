@@ -83,8 +83,8 @@
         "chalk": "2.4.2"
     },
     "devDependencies": {
-        "@babel/core": "7.9.0",
-        "@babel/node": "7.8.7",
+        "@babel/core": "^7.23.5",
+        "@babel/node": "^7.22.19",
         "@babel/preset-env": "7.9.5",
         "@yarnpkg/pnpify": "^2.0.0-rc.20",
         "babel-eslint": "10.1.0",
@@ -107,7 +107,7 @@
         "tailwindcss-dir": "4.0.0"
     },
     "scripts": {
-        "start": "yarn run tailwind && react-scripts start",
+        "start": "yarn run tailwind && react-scripts --openssl-legacy-provider start",
         "build": "yarn run tailwind && yarn run purge-tailwind && cross-env GENERATE_SOURCEMAP=false react-scripts build",
         "tailwind": "tailwind build ./src/styles/tailwind-config.css -c ./tailwind.config.js -o ./src/styles/tailwind.css",
         "purge-tailwind": "node ./purge-tailwindcss.js",

@@ -62,10 +62,10 @@ const LoginPage = props => {
         <FuseAnimate animation="transition.expandIn">
           <Card className="w-full max-w-384">
             <CardContent className="flex flex-col items-center justify-center p-32">
-              <img className="w-128 m-32" src="assets/images/logos/1x/smsparatodos.png" alt="logo smsparatodos" />
+              <img className="w-256 m-20" src="assets/images/logos/smsforall-horizontal@4x.png" alt="logo smsparatodos" />
 
               <Typography variant="h6" className="mt-16 mb-32">
-                Iniciar sesión
+                Log in
               </Typography>
 
               <form name="loginForm" noValidate className="flex flex-col justify-center w-full" onSubmit={handleSubmit}>
@@ -96,7 +96,7 @@ const LoginPage = props => {
 
                 <div className="flex items-center justify-between">
                   <Link className="font-medium" to="/auth/forgot-password">
-                    Olvidaste tu contraseña?
+                    Did you forget the password?
                   </Link>
                 </div>
 
@@ -111,9 +111,9 @@ const LoginPage = props => {
               </div>
 
               <div className="flex flex-col items-center justify-center pt-32 pb-24">
-                <span className="font-medium">No tienes cuenta?</span>
+                <span className="font-medium">Don't have an account?</span>
                 <Link className="font-medium" to="/auth/register">
-                  Crear una cuenta
+                  Register one for free
                 </Link>
               </div>
             </CardContent>
