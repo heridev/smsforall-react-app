@@ -61,7 +61,7 @@ const Course = props => {
           <IconButton to="/mobile-hubs/list" component={Link}>
             <Icon>{theme.direction === 'ltr' ? 'arrow_back' : 'arrow_forward'}</Icon>
           </IconButton>
-          <Typography className="flex-1 text-20 mx-16">Como funciona smsparatodos.com</Typography>
+          <Typography className="flex-1 text-20 mx-16">How it works smsforall.org</Typography>
         </div>
       }
       content={
@@ -76,52 +76,52 @@ const Course = props => {
               >
                 <div className="flex justify-center pb-64 sm:p-2 sm:pb-2 md:p-2 md:pb-50" key={1}>
                   <Paper className="w-full max-w-lg rounded-8 p-16 md:p-24" elevation={1}>
-                    <h1>Regístrate</h1>
+                    <h1>Register a new account</h1>
                     <img className="w-256 m-32" src="assets/images/pages/registrate.jpg" alt="registro" />
                   </Paper>
                 </div>
 
                 <div className="flex justify-center pb-64 sm:p-2 sm:pb-2 md:p-2 md:pb-50" key={2}>
                   <Paper className="w-full max-w-lg rounded-8 p-16 md:p-24" elevation={1}>
-                    <h1>Registra un nuevo dispositivo móvil</h1>
+                    <h1>Register a new device</h1>
                     <p>
-                      Que cuente con un plan válido para envío de SMS (la gran mayoría de empresas de telefonía ofrecen
-                      planes ilimitados)
+                      that has a valid plan to send SMS messages
                     </p>
-                    <img className="w-256 m-32" src="assets/images/pages/how-it-works-part-2.jpg" alt="registro" />
+                    <img className="w-256 m-32" src="assets/images/pages/register-new-device.jpg" alt="registro" />
                   </Paper>
                 </div>
 
                 <div className="flex justify-center pb-64 sm:p-2 sm:pb-2 md:p-2 md:pb-50" key={3}>
                   <Paper className="w-full max-w-lg rounded-8 p-16 md:p-24" elevation={1}>
-                    <h1>Descarga nuestra Android app</h1>
-                    <p>Disponible en la Play Store</p>
-                    <img className="w-256 m-32" src="assets/images/pages/disponible-playstore.jpg" alt="registro" />
+                    <h1>Download our APK </h1>
+                    <p>You can test the functionality initially by installing the current APK that uses the https://api.smsforall.org API internally</p>
+                    <p>Or you can download the source code and build your own version!</p>
+                    <Link to={{ pathname: 'https://smsforall.org/download/' }} target="_blank">https://smsforall.org/download/</Link>
                   </Paper>
                 </div>
 
                 <div className="flex justify-center pb-64 sm:p-2 sm:pb-2 md:p-2 md:pb-50" key={4}>
                   <Paper className="w-full max-w-lg rounded-8 p-16 md:p-24" elevation={1}>
-                    <h1>Ingresa el pin de activación</h1>
-                    <p>El cual fue generado automáticamente después de crear un nuevo dispositivo, ej: OHcbTr</p>
-                    <img className="w-256 m-32" src="assets/images/pages/ingreso-pin.jpg" alt="registro" />
+                    <h1>Enter your activation code(pin)</h1>
+                    <p>This one is generated after you add a new device and is a short pin, eg: OHcbTr</p>
+                    <img className="w-256 m-32" src="assets/images/pages/activation-needed.jpg" alt="registro" />
                   </Paper>
                 </div>
 
                 <div className="flex justify-center pb-64 sm:p-2 sm:pb-2 md:p-2 md:pb-50" key={5}>
                   <Paper className="w-full max-w-lg rounded-8 p-16 md:p-24" elevation={1}>
-                    <h1>Validación de dispositivo</h1>
-                    <p>Espera un momento para validar tu dispositivo</p>
-                    <img className="w-256 m-32" src="assets/images/pages/validando-dispositivo.jpg" alt="registro" />
+                    <h1>Validation of your device</h1>
+                    <p>Wait a moemnt until we validate your device</p>
+                    <img className="w-256 m-32" src="assets/images/pages/sending-test.jpg" alt="registro" />
                   </Paper>
                 </div>
 
                 <div className="flex justify-center pb-64 sm:p-2 sm:pb-2 md:p-2 md:pb-50" key={6}>
                   <Paper className="w-full max-w-lg rounded-8 p-16 md:p-24" elevation={1}>
-                    <h1>Estado del dispositivo</h1>
+                    <h1>Device's status</h1>
                     <p>
-                      Si todo salió correctamente podrás comenzar a enviar mensajes a través de nuestra API o desde
-                      nuestro panel en smsparatodos.com
+                      If everything went well, you should be able to send SMS message through our API(https://api.smsforall.org)
+                      or using our panel at https://app.smsforall.org
                     </p>
                     <img className="w-256 m-32" src="assets/images/pages/estado-dispositivo.jpg" alt="registro" />
                   </Paper>
@@ -129,17 +129,23 @@ const Course = props => {
 
                 <div className="flex justify-center pb-64 sm:p-2 sm:pb-2 md:p-2 md:pb-50" key={7}>
                   <Paper className="w-full max-w-lg rounded-8 p-16 md:p-24" elevation={1}>
-                    <h1>Integra smsparatodos.com en tu aplicación Web</h1>
-                    <p>CRM, CMS, etc, o utiliza nuestro panel de usuario para envío de mensajes.</p>
+                    <h1>Integrate {' '}
+                      <Link to={{ pathname: 'https://api.smsforall.org' }} target="_blank">https://api.smsforall.org</Link>
+                      {' '}
+                      in your custom application</h1>
+                    <p>CRM, CMS, etc, o use our panel at {' '}
+                      <Link to={{ pathname: 'https://app.smsforall.org' }} target="_blank">https://app.smsforall.org</Link>
+                      {' '}
+                      to send messages and manage them</p>
                   </Paper>
                 </div>
 
                 <div className="flex justify-center pb-64 sm:p-2 sm:pb-2 md:p-2 md:pb-50" key={8}>
                   <Paper className="w-full max-w-lg rounded-8 p-16 md:p-24" elevation={1}>
-                    <h1>Comienza a enviar mensajes de textos grátis</h1>
+                    <h1>Begin sending unlimited SMS messages</h1>
                     <p>
-                      Ahora podrás enviar mensajes de texto transaccionales y para campañas gratis, solo recuerda
-                      mantener tu dispositivo siempre conectado a internet y con un plan de telefonía valido.
+                      Starting now, you would be able to send transactional SMS and all you need to do is to keep
+                      your device connected to internet, with a valid SMS plan and active(avoid the suspense mode).
                     </p>
                   </Paper>
                 </div>
@@ -174,35 +180,35 @@ const Course = props => {
       leftSidebarContent={
         <Stepper classes={{ root: 'bg-transparent' }} activeStep={activeStep - 1} orientation="vertical">
           <Step key={1} onClick={() => handleChangeActiveStep(1)}>
-            <StepLabel classes={{ root: classes.stepLabel }}>Regístrate</StepLabel>
+            <StepLabel classes={{ root: classes.stepLabel }}>Register a new account</StepLabel>
           </Step>
 
           <Step key={2} onClick={() => handleChangeActiveStep(2)}>
-            <StepLabel classes={{ root: classes.stepLabel }}>Registra un nuevo dispositivo</StepLabel>
+            <StepLabel classes={{ root: classes.stepLabel }}>Register a new mobile device</StepLabel>
           </Step>
 
           <Step key={3} onClick={() => handleChangeActiveStep(3)}>
-            <StepLabel classes={{ root: classes.stepLabel }}>Descarga nuestra Android app</StepLabel>
+            <StepLabel classes={{ root: classes.stepLabel }}>Download our Android application or build your own</StepLabel>
           </Step>
 
           <Step key={4} onClick={() => handleChangeActiveStep(4)}>
-            <StepLabel classes={{ root: classes.stepLabel }}>Ingresa el pin de activación</StepLabel>
+            <StepLabel classes={{ root: classes.stepLabel }}>Enter the activation code</StepLabel>
           </Step>
 
           <Step key={5} onClick={() => handleChangeActiveStep(5)}>
-            <StepLabel classes={{ root: classes.stepLabel }}>Validación de dispositivo</StepLabel>
+            <StepLabel classes={{ root: classes.stepLabel }}>Validate your device</StepLabel>
           </Step>
 
           <Step key={6} onClick={() => handleChangeActiveStep(6)}>
-            <StepLabel classes={{ root: classes.stepLabel }}>Estado del dispositivo</StepLabel>
+            <StepLabel classes={{ root: classes.stepLabel }}>Device's status</StepLabel>
           </Step>
 
           <Step key={7} onClick={() => handleChangeActiveStep(7)}>
-            <StepLabel classes={{ root: classes.stepLabel }}>Integra smsparatodos.com en tu aplicación</StepLabel>
+            <StepLabel classes={{ root: classes.stepLabel }}>How to integrate the https://api.smsforall.org API in your application</StepLabel>
           </Step>
 
           <Step key={8} onClick={() => handleChangeActiveStep(8)}>
-            <StepLabel classes={{ root: classes.stepLabel }}>Comienza a enviar mensajes de textos grátis</StepLabel>
+            <StepLabel classes={{ root: classes.stepLabel }}>Begin sending unlimited SMS messages</StepLabel>
           </Step>
         </Stepper>
       }
