@@ -8,7 +8,7 @@ const resources = {
 		translation: {
 			'Welcome to React': 'Welcome to React and react-i18next'
 		}
-  },
+	},
 	es: {
 		translation: {
 			'Welcome to React': 'Bienvenido a smsparatodos.com'
@@ -19,7 +19,7 @@ const resources = {
 i18n.use(initReactI18next) // passes i18n down to react-i18next
 	.init({
 		resources,
-		lng: 'es',
+		lng: 'en',
 
 		keySeparator: false, // we do not use keys in form messages.welcome
 
