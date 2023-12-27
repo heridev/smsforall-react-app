@@ -2,9 +2,9 @@
 ## Available Scripts
 
 ### How to run the project locally?
-Run
+Run the following command and make sure you use an accessible URL(e.g. using ngrok)
 ```
-export REACT_APP_API_URL=http://localhost:3030
+export REACT_APP_API_URL=https://quick-xxx-xxxxxx.ngrok-free.app
 yarn install
 yarn start
 ```
